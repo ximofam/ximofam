@@ -2,11 +2,13 @@
 
 ### 🛠️ Tech Stack & Skills
 
-**Programming Languages:**
+**Programming Languages & Frameworks:**
 ![Golang](https://img.shields.io/badge/go-%2300ADD8.svg?style=for-the-badge&logo=go&logoColor=white)
 ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 ![C++](https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white)
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
 
 **Databases & Caching:**
 ![PostgreSQL](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
@@ -21,17 +23,15 @@
 
 ### 💻 Featured Projects
 
-* **[Project Name 1](Link_to_your_repo)** - A brief description of the project. Built with Golang, PostgreSQL, and Redis to handle high-performance data processing.
-* **[Project Name 2](Link_to_your_repo)** - A scalable backend API for [specific use case] utilizing Python, Docker, and MySQL.
-* **[Project Name 3](Link_to_your_repo)** - An object-oriented system developed in Java and C++ focusing on [specific feature].
+* **[Chess online](https://github.com/ximofam/chess-online)** - Built with Golang, MySQL, WebSockets, and ReactJS for the frontend.
+* **[Spring Job Platform](https://github.com/ximofam/spring-job-platform-backend)** - Built RESTful API with Spring MVC, PostgreSQL, and Redis for caching and message brokering. Includes real-time service notifications and chat functionality.
+* **[Django Job Platform](https://github.com/ximofam/django-job-platform-backend)** - Built RESTful API with Django, DRF, PostgreSQL, and Redis. Features real-time service notifications powered by Go.
 
-*(Note: Replace the placeholders above with your actual projects!)*
-
-
+---
 
 ### 📫 How to reach me
 
 - **Email:** vienpham177@gmail.com
-- **LinkedIn:** www.linkedin.com/in/viễn-phạm-188a543a7
+- **LinkedIn:** [Viễn Phạm](https://www.linkedin.com/in/viễn-phạm-188a543a7)
 
 > *"Always eager to learn new technologies and build efficient, scalable systems!"*
