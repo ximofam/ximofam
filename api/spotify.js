@@ -1,21 +1,14 @@
 // api/spotify.js
 import { getSpotifyPresence } from './lib/spotify.js';
 import { renderCard } from './lib/renderCard.js';
+import { parseQueryParams, setNoCacheHeaders } from './lib/utils.js';
 
 /**
  * Serverless Function handler for Vercel and local dev server
  */
 export default async function handler(req, res) {
   try {
-    // Parse query parameters
-    let query = {};
-    if (req.query) {
-      query = req.query;
-    } else if (req.url) {
-      const parsedUrl = new URL(req.url, `http://${req.headers?.host || 'localhost'}`);
-      query = Object.fromEntries(parsedUrl.searchParams.entries());
-    }
-
+    const query = parseQueryParams(req);
     const presence = await getSpotifyPresence();
 
     // 1. If redirect=true, redirect to song on Spotify
@@ -29,10 +22,7 @@ export default async function handler(req, res) {
 
     // 2. If format=json, return raw JSON
     if (query.format === 'json') {
-      res.setHeader('Content-Type', 'application/json; charset=utf-8');
-      res.setHeader('Cache-Control', 'max-age=0, s-maxage=0, no-cache, no-store, must-revalidate');
-      res.setHeader('Pragma', 'no-cache');
-      res.setHeader('Expires', '0');
+      setNoCacheHeaders(res, 'application/json; charset=utf-8');
       res.end(JSON.stringify(presence, null, 2));
       return;
     }
@@ -43,13 +33,7 @@ export default async function handler(req, res) {
     });
 
     // Disable caching completely so GitHub Camo proxy always fetches fresh data
-    res.setHeader('Content-Type', 'image/svg+xml; charset=utf-8');
-    res.setHeader(
-      'Cache-Control',
-      'max-age=0, s-maxage=0, no-cache, no-store, must-revalidate'
-    );
-    res.setHeader('Pragma', 'no-cache');
-    res.setHeader('Expires', '0');
+    setNoCacheHeaders(res, 'image/svg+xml; charset=utf-8');
     res.end(svg);
   } catch (error) {
     console.error('Spotify API Error:', error);
@@ -62,10 +46,7 @@ export default async function handler(req, res) {
       artist: error.message || 'Failed to fetch status',
     });
 
-    res.setHeader('Content-Type', 'image/svg+xml; charset=utf-8');
-    res.setHeader('Cache-Control', 'max-age=0, s-maxage=0, no-cache, no-store, must-revalidate');
-    res.setHeader('Pragma', 'no-cache');
-    res.setHeader('Expires', '0');
+    setNoCacheHeaders(res, 'image/svg+xml; charset=utf-8');
     res.end(fallbackSvg);
   }
 }

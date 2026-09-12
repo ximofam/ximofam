@@ -1,25 +1,5 @@
 // api/lib/renderTopTracks.js
-
-/**
- * Escapes characters for XML/SVG safety
- */
-function escapeXml(unsafe) {
-  return (unsafe || '')
-    .toString()
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&apos;');
-}
-
-/**
- * Truncates string to a max character count
- */
-function truncate(str, maxLen) {
-  if (!str) return '';
-  return str.length > maxLen ? str.slice(0, maxLen - 1) + '…' : str;
-}
+import { escapeXml, truncate, getThemeColors, getSpotifyLogoSvg } from './utils.js';
 
 const RANGE_LABELS = {
   short_term: 'LAST 4 WEEKS',
@@ -34,36 +14,30 @@ const RANK_COLORS = {
 };
 
 /**
- * Renders user's top tracks as an SVG card
+ * Generates stepped keyframes for smooth auto-scrolling
+ */
+function generateScrollKeyframes(trackCount, rowHeight) {
+  const step = 100 / trackCount;
+  let keyframes = '';
+
+  for (let i = 0; i < trackCount; i++) {
+    const start = (i * step).toFixed(1);
+    const pauseEnd = (i * step + step * 0.75).toFixed(1);
+    const currentY = -(i * rowHeight);
+
+    keyframes += `    ${start}%, ${pauseEnd}% { transform: translateY(${currentY}px); }\n`;
+  }
+
+  const finalY = -(trackCount * rowHeight);
+  keyframes += `    100% { transform: translateY(${finalY}px); }`;
+  return keyframes;
+}
+
+/**
+ * Renders user's top tracks as an SVG card with smooth vertical auto-scrolling
  */
 export function renderTopTracks(data, options = {}) {
-  const isLight = options.theme === 'light';
-
-  const colors = isLight
-    ? {
-        bgStart: '#F6F8FA',
-        bgEnd: '#FFFFFF',
-        border: '#D0D7DE',
-        title: '#1F2328',
-        artist: '#59636E',
-        rankOther: '#8C959F',
-        divider: '#EAEBEF',
-        badgeBg: '#EAEBEF',
-        badgeText: '#57606A',
-        brand: '#1DB954',
-      }
-    : {
-        bgStart: '#0D1117',
-        bgEnd: '#161B22',
-        border: '#30363D',
-        title: '#F0F6FC',
-        artist: '#8B949E',
-        rankOther: '#6E7681',
-        divider: '#21262D',
-        badgeBg: '#21262D',
-        badgeText: '#8B949E',
-        brand: '#1DB954',
-      };
+  const colors = getThemeColors(options.theme);
 
   const {
     status = 'success',
@@ -75,15 +49,15 @@ export function renderTopTracks(data, options = {}) {
   const rangeBadgeText = RANGE_LABELS[timeRange] || 'TOP TRACKS';
   const rowHeight = 48;
   const headerHeight = 52;
-  const bottomPadding = 12;
+  const bottomPadding = 8;
+  const visibleCount = 4; // Show top 4 at a time
 
-  // Compute card height dynamically based on track count
   const contentTracks = status === 'success' ? tracks : [];
-  const cardHeight = Math.max(140, headerHeight + Math.max(1, contentTracks.length) * rowHeight + bottomPadding);
 
   // If unconfigured or error
   if (status !== 'success' || contentTracks.length === 0) {
-    const errorMsg = error || (status === 'unconfigured' ? 'Run `yarn auth` to configure Spotify' : 'No top tracks found');
+    const errorMsg =
+      error || (status === 'unconfigured' ? 'Run `yarn auth` to configure Spotify' : 'No top tracks found');
     return `<svg width="420" height="140" viewBox="0 0 420 140" fill="none" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="card-grad" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -101,8 +75,22 @@ export function renderTopTracks(data, options = {}) {
     </svg>`;
   }
 
+  // Determine if auto-scroll is needed
+  const shouldScroll = contentTracks.length > visibleCount;
+  const displayedCount = Math.min(contentTracks.length, visibleCount);
+  const viewportHeight = displayedCount * rowHeight;
+  const cardHeight = headerHeight + viewportHeight + bottomPadding;
+
+  // If scrolling, duplicate first `visibleCount` tracks at the bottom for seamless infinite loop
+  const scrollItems = shouldScroll
+    ? [...contentTracks, ...contentTracks.slice(0, visibleCount)]
+    : contentTracks;
+
+  // Animation duration: ~2.8s per track
+  const animDuration = Math.max(12, contentTracks.length * 2.8);
+
   // Generate SVG definitions for clip paths
-  const clipDefs = contentTracks
+  const clipDefs = scrollItems
     .map(
       (_, index) => `
       <clipPath id="track-clip-${index}">
@@ -112,7 +100,7 @@ export function renderTopTracks(data, options = {}) {
     .join('\n');
 
   // Generate track rows
-  const trackRows = contentTracks
+  const trackRows = scrollItems
     .map((track, index) => {
       const rowY = headerHeight + index * rowHeight;
       const rankColor = RANK_COLORS[track.rank] || colors.rankOther;
@@ -128,12 +116,12 @@ export function renderTopTracks(data, options = {}) {
         `;
 
       const divider =
-        index < contentTracks.length - 1
+        index < scrollItems.length - 1
           ? `<line x1="24" y1="${rowY + rowHeight}" x2="396" y2="${rowY + rowHeight}" stroke="${colors.divider}" stroke-width="1" />`
           : '';
 
       return `
-      <!-- Track Row ${track.rank} -->
+      <!-- Track Row ${track.rank} (index ${index}) -->
       <g class="track-row">
         <!-- Rank -->
         <text x="32" y="${rowY + 29}" class="rank-num" fill="${rankColor}" text-anchor="middle">#${track.rank}</text>
@@ -151,12 +139,37 @@ export function renderTopTracks(data, options = {}) {
     })
     .join('\n');
 
+  // Keyframes and CSS
+  const scrollKeyframes = shouldScroll
+    ? `
+    @keyframes autoScrollTracks {
+${generateScrollKeyframes(contentTracks.length, rowHeight)}
+    }
+    .track-scroller {
+      animation: autoScrollTracks ${animDuration}s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+    }
+    .track-scroller:hover {
+      animation-play-state: paused;
+    }
+  `
+    : '';
+
+  const headerTitleText = contentTracks.length > visibleCount
+    ? `TOP ${contentTracks.length} TRACKS`
+    : 'TOP TRACKS';
+
   return `<svg width="420" height="${cardHeight}" viewBox="0 0 420 ${cardHeight}" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient id="card-grad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="${colors.bgStart}" />
       <stop offset="100%" stop-color="${colors.bgEnd}" />
     </linearGradient>
+
+    <!-- Viewport clip path to constrain visible tracks to 4 rows -->
+    <clipPath id="viewport-clip">
+      <rect x="0" y="${headerHeight}" width="420" height="${viewportHeight}" />
+    </clipPath>
+
     ${clipDefs}
   </defs>
 
@@ -192,26 +205,43 @@ export function renderTopTracks(data, options = {}) {
       font-size: 11px;
       font-weight: 400;
     }
+    ${scrollKeyframes}
   </style>
 
   <!-- Background -->
   <rect width="420" height="${cardHeight}" rx="12" fill="url(#card-grad)" stroke="${colors.border}" stroke-width="1" />
 
-  <!-- Header -->
-  <g class="header">
-    <text x="24" y="32" class="header-title">TOP TRACKS</text>
-    
-    <!-- Time range pill badge -->
-    <rect x="110" y="20" width="105" height="18" rx="9" fill="${colors.badgeBg}" />
-    <text x="162" y="32" class="badge-text" text-anchor="middle">${rangeBadgeText}</text>
-
-    <!-- Spotify Logo (Top Right) -->
-    <g transform="translate(380, 20) scale(0.75)">
-      <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.497 17.305c-.215.352-.676.463-1.028.248-2.813-1.718-6.353-2.107-10.525-1.154-.403.092-.807-.16-.9-.562-.091-.403.16-.807.563-.9 4.568-1.044 8.483-.604 11.642 1.339.352.215.463.677.248 1.029zm1.467-3.26c-.27.44-.849.577-1.288.307-3.22-1.979-8.13-2.551-11.939-1.394-.496.15-1.023-.134-1.174-.63-.151-.496.134-1.024.63-1.175 4.356-1.322 9.776-.682 13.464 1.583.44.27.577.849.307 1.309zm.126-3.398C15.234 8.358 8.874 8.148 5.163 9.274c-.59.18-1.218-.16-1.398-.75-.18-.59.16-1.218.75-1.398 4.254-1.291 11.278-1.045 15.748 1.61.53.315.703 1.002.388 1.533-.314.53-1.002.703-1.56.378z" fill="${colors.brand}"/>
+  <!-- Viewport for Track List (Shows 4 at a time with smooth infinite auto-scroll) -->
+  <g clip-path="url(#viewport-clip)">
+    <g class="${shouldScroll ? 'track-scroller' : ''}">
+      ${trackRows}
     </g>
   </g>
 
-  <!-- Track List -->
-  ${trackRows}
+  <!-- Header Background Shield to ensure clean top boundary -->
+  <path d="M1 12C1 5.92487 5.92487 1 12 1H408C414.075 1 419 5.92487 419 12V${headerHeight}H1V12Z" fill="${colors.headerBg}" />
+  <line x1="1" y1="${headerHeight}" x2="419" y2="${headerHeight}" stroke="${colors.divider}" stroke-width="1" />
+
+  <!-- Header Content -->
+  <g class="header">
+    <text x="24" y="32" class="header-title">${headerTitleText}</text>
+    
+    <!-- Time range pill badge -->
+    <rect x="132" y="20" width="105" height="18" rx="9" fill="${colors.badgeBg}" />
+    <text x="184" y="32" class="badge-text" text-anchor="middle">${rangeBadgeText}</text>
+
+    ${
+      shouldScroll
+        ? `
+    <!-- Auto-scroll indicator badge -->
+    <rect x="244" y="20" width="68" height="18" rx="9" fill="${colors.badgeBg}" />
+    <text x="278" y="32" class="badge-text" text-anchor="middle">↕ AUTO</text>
+    `
+        : ''
+    }
+
+    <!-- Spotify Logo (Top Right) -->
+    ${getSpotifyLogoSvg(380, 20, 0.75, colors.brand)}
+  </g>
 </svg>`;
 }

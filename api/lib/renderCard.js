@@ -1,67 +1,11 @@
 // api/lib/renderCard.js
-
-/**
- * Escapes characters for XML/SVG safety
- */
-function escapeXml(unsafe) {
-  return (unsafe || '')
-    .toString()
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&apos;');
-}
-
-/**
- * Formats milliseconds into M:SS string
- */
-function formatTime(ms) {
-  if (!ms || ms <= 0) return '0:00';
-  const totalSeconds = Math.floor(ms / 1000);
-  const minutes = Math.floor(totalSeconds / 60);
-  const seconds = totalSeconds % 60;
-  return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-}
-
-/**
- * Truncates string to a max character count
- */
-function truncate(str, maxLen) {
-  if (!str) return '';
-  return str.length > maxLen ? str.slice(0, maxLen - 1) + '…' : str;
-}
+import { escapeXml, truncate, formatTime, getThemeColors, getSpotifyLogoSvg } from './utils.js';
 
 /**
  * Renders the Spotify Presence card as an SVG string
  */
 export function renderCard(presence, options = {}) {
-  const isLight = options.theme === 'light';
-
-  // Color palette
-  const colors = isLight
-    ? {
-        bgStart: '#F6F8FA',
-        bgEnd: '#FFFFFF',
-        border: '#D0D7DE',
-        title: '#1F2328',
-        artist: '#59636E',
-        time: '#656D76',
-        barBg: '#EAEBEF',
-        brand: '#1DB954',
-        statusRecent: '#6E7681',
-      }
-    : {
-        bgStart: '#0D1117',
-        bgEnd: '#161B22',
-        border: '#30363D',
-        title: '#F0F6FC',
-        artist: '#8B949E',
-        time: '#7D8590',
-        barBg: '#21262D',
-        brand: '#1DB954',
-        statusRecent: '#8B949E',
-      };
+  const colors = getThemeColors(options.theme);
 
   const {
     status = 'idle',
@@ -209,9 +153,7 @@ export function renderCard(presence, options = {}) {
   ${statusHeader}
 
   <!-- Spotify Logo (Top Right) -->
-  <g transform="translate(382, 18) scale(0.8)">
-    <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.497 17.305c-.215.352-.676.463-1.028.248-2.813-1.718-6.353-2.107-10.525-1.154-.403.092-.807-.16-.9-.562-.091-.403.16-.807.563-.9 4.568-1.044 8.483-.604 11.642 1.339.352.215.463.677.248 1.029zm1.467-3.26c-.27.44-.849.577-1.288.307-3.22-1.979-8.13-2.551-11.939-1.394-.496.15-1.023-.134-1.174-.63-.151-.496.134-1.024.63-1.175 4.356-1.322 9.776-.682 13.464 1.583.44.27.577.849.307 1.309zm.126-3.398C15.234 8.358 8.874 8.148 5.163 9.274c-.59.18-1.218-.16-1.398-.75-.18-.59.16-1.218.75-1.398 4.254-1.291 11.278-1.045 15.748 1.61.53.315.703 1.002.388 1.533-.314.53-1.002.703-1.56.378z" fill="${colors.brand}"/>
-  </g>
+  ${getSpotifyLogoSvg(382, 18, 0.8, colors.brand)}
 
   <!-- Track Title -->
   <text x="115" y="53" class="song-title" fill="${colors.title}">${safeTitle}</text>

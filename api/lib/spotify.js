@@ -1,4 +1,6 @@
 // api/lib/spotify.js
+import { getRelativeTime } from './utils.js';
+
 const TOKEN_ENDPOINT = 'https://accounts.spotify.com/api/token';
 const NOW_PLAYING_ENDPOINT = 'https://api.spotify.com/v1/me/player/currently-playing';
 const RECENTLY_PLAYED_ENDPOINT = 'https://api.spotify.com/v1/me/player/recently-played?limit=1';
@@ -132,25 +134,6 @@ export async function getRecentlyPlayed(accessToken) {
 }
 
 /**
- * Calculates human-readable relative time (e.g. "3m ago", "1h ago")
- */
-function getRelativeTime(dateString) {
-  if (!dateString) return '';
-  const now = new Date();
-  const played = new Date(dateString);
-  const diffMs = now - played;
-  const diffSec = Math.floor(diffMs / 1000);
-  const diffMin = Math.floor(diffSec / 60);
-  const diffHour = Math.floor(diffMin / 60);
-  const diffDay = Math.floor(diffHour / 24);
-
-  if (diffDay > 0) return `${diffDay}d ago`;
-  if (diffHour > 0) return `${diffHour}h ago`;
-  if (diffMin > 0) return `${diffMin}m ago`;
-  return 'Just now';
-}
-
-/**
  * Retrieves the complete Spotify presence: currently playing track, or fallback to recently played.
  */
 export async function getSpotifyPresence() {
@@ -278,7 +261,7 @@ export async function getSpotifyPresence() {
  * @param {'short_term' | 'medium_term' | 'long_term'} timeRange - approx 4 weeks, 6 months, or years
  * @param {number} limit - number of tracks (1 to 10)
  */
-export async function getTopTracks(timeRange = 'short_term', limit = 5) {
+export async function getTopTracks(timeRange = 'short_term', limit = 10) {
   loadEnv();
 
   if (!process.env.SPOTIFY_REFRESH_TOKEN) {
@@ -293,7 +276,7 @@ export async function getTopTracks(timeRange = 'short_term', limit = 5) {
 
   const validRanges = ['short_term', 'medium_term', 'long_term'];
   const safeRange = validRanges.includes(timeRange) ? timeRange : 'short_term';
-  const safeLimit = Math.max(1, Math.min(10, parseInt(limit, 10) || 5));
+  const safeLimit = Math.max(1, Math.min(20, parseInt(limit, 10) || 10));
 
   const token = await getAccessToken();
   const endpoint = `${TOP_TRACKS_ENDPOINT}?time_range=${safeRange}&limit=${safeLimit}`;
