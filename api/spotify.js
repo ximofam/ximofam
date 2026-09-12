@@ -30,7 +30,9 @@ export default async function handler(req, res) {
     // 2. If format=json, return raw JSON
     if (query.format === 'json') {
       res.setHeader('Content-Type', 'application/json; charset=utf-8');
-      res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+      res.setHeader('Cache-Control', 'max-age=0, s-maxage=0, no-cache, no-store, must-revalidate');
+      res.setHeader('Pragma', 'no-cache');
+      res.setHeader('Expires', '0');
       res.end(JSON.stringify(presence, null, 2));
       return;
     }
@@ -40,12 +42,14 @@ export default async function handler(req, res) {
       theme: query.theme || 'dark',
     });
 
-    // Cache-Control: s-maxage=30 tells GitHub's Camo caching proxy to revalidate after 30s
+    // Disable caching completely so GitHub Camo proxy always fetches fresh data
     res.setHeader('Content-Type', 'image/svg+xml; charset=utf-8');
     res.setHeader(
       'Cache-Control',
-      'public, max-age=0, s-maxage=30, stale-while-revalidate=60, must-revalidate'
+      'max-age=0, s-maxage=0, no-cache, no-store, must-revalidate'
     );
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
     res.end(svg);
   } catch (error) {
     console.error('Spotify API Error:', error);
@@ -59,7 +63,9 @@ export default async function handler(req, res) {
     });
 
     res.setHeader('Content-Type', 'image/svg+xml; charset=utf-8');
-    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.setHeader('Cache-Control', 'max-age=0, s-maxage=0, no-cache, no-store, must-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
     res.end(fallbackSvg);
   }
 }
