@@ -178,8 +178,13 @@ export async function getSpotifyPresence() {
   const token = await getAccessToken();
   const nowPlayingData = await getNowPlaying(token);
 
-  // Check if currently playing music
-  if (nowPlayingData && nowPlayingData.item && nowPlayingData.currently_playing_type === 'track') {
+  // 1. User is ACTIVELY playing music right now
+  if (
+    nowPlayingData &&
+    nowPlayingData.is_playing &&
+    nowPlayingData.item &&
+    nowPlayingData.currently_playing_type === 'track'
+  ) {
     const item = nowPlayingData.item;
     // Prefer medium size (300x300, index 1) or fallback to 640x640 / 64x64
     const albumImage = item.album?.images?.[1]?.url || item.album?.images?.[0]?.url || null;
@@ -187,7 +192,7 @@ export async function getSpotifyPresence() {
 
     return {
       status: 'playing',
-      isPlaying: Boolean(nowPlayingData.is_playing),
+      isPlaying: true,
       title: item.name || 'Unknown Track',
       artist: (item.artists || []).map((a) => a.name).join(', ') || 'Unknown Artist',
       album: item.album?.name || '',
@@ -198,6 +203,33 @@ export async function getSpotifyPresence() {
       progressMs: nowPlayingData.progress_ms || 0,
       isRecentlyPlayed: false,
       playedAt: null,
+    };
+  }
+
+  // 2. User has PAUSED music (playback stopped, but player has the track)
+  if (
+    nowPlayingData &&
+    !nowPlayingData.is_playing &&
+    nowPlayingData.item &&
+    nowPlayingData.currently_playing_type === 'track'
+  ) {
+    const item = nowPlayingData.item;
+    const albumImage = item.album?.images?.[1]?.url || item.album?.images?.[0]?.url || null;
+    const albumImageBase64 = await fetchBase64Image(albumImage);
+
+    return {
+      status: 'recent',
+      isPlaying: false,
+      title: item.name || 'Unknown Track',
+      artist: (item.artists || []).map((a) => a.name).join(', ') || 'Unknown Artist',
+      album: item.album?.name || '',
+      albumImageUrl: albumImage,
+      albumImageBase64,
+      songUrl: item.external_urls?.spotify || 'https://open.spotify.com',
+      durationMs: item.duration_ms || 0,
+      progressMs: nowPlayingData.progress_ms || 0,
+      isRecentlyPlayed: true,
+      playedAt: 'recently',
     };
   }
 

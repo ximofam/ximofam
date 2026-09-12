@@ -103,8 +103,10 @@ export function renderCard(presence, options = {}) {
     `;
   } else if (isRecentlyPlayed) {
     statusHeader = `
-      <circle cx="118" cy="22" r="3.5" fill="${colors.statusRecent}" />
-      <text x="128" y="26" class="header-status" fill="${colors.statusRecent}">RECENTLY PLAYED</text>
+      <g transform="translate(115, 17) scale(0.65)">
+        <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm4.2 14.2L11 13V7h1.5v5.2l4.5 2.7-.8 1.3z" fill="${colors.statusRecent}" />
+      </g>
+      <text x="134" y="26" class="header-status" fill="${colors.statusRecent}">RECENTLY PLAYED</text>
     `;
   } else {
     statusHeader = `
@@ -133,9 +135,10 @@ export function renderCard(presence, options = {}) {
       <rect x="115" y="88" width="${progressWidth}" height="4" rx="2" fill="url(#progress-grad)" />
       <text x="330" y="92" class="time-text" fill="${colors.time}">${progressTimeStr}</text>
     `;
-  } else if (isRecentlyPlayed && playedAt) {
+  } else if (isRecentlyPlayed) {
+    const timeLabel = playedAt && playedAt !== 'recently' ? `Played ${playedAt}` : 'Last played song';
     bottomContent = `
-      <text x="115" y="92" class="time-text" fill="${colors.time}">Played ${playedAt}</text>
+      <text x="115" y="92" class="time-text" fill="${colors.time}">${timeLabel}</text>
     `;
   } else if (status === 'unconfigured') {
     bottomContent = `
