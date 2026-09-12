@@ -22,9 +22,8 @@
 
 ---
 
-### 💬 My Discord
-
-[![Discord Presence](https://lanyard.cnrad.dev/api/870659061308342312/?idleMessage=Wishing%20everyone%20who%20reads%20this%20a%20wonderful%20day!)](https://discord.com/users/870659061308342312)
+### 🎵 Music for life
+[![Spotify Presence](https://my-github-widget.vercel.app/api/spotify)](https://my-github-widget.vercel.app/api/spotify?redirect=true)
 
 ---
 
