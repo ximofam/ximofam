@@ -25,6 +25,8 @@
 ### 🎵 Music for life
 [![Spotify Presence](https://my-github-widget.vercel.app/api/spotify)](https://my-github-widget.vercel.app/api/spotify?redirect=true)
 
+[![Top Tracks](https://my-github-widget.vercel.app/api/top-tracks?range=long_term&limit=10)](https://open.spotify.com)
+
 ---
 
 ### 📫 How to reach me
