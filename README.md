@@ -23,9 +23,8 @@
 ---
 
 ### 💬 My Discord
-[![Discord](https://img.shields.io/badge/Discord-5865F2.svg?style=for-the-badge&logo=discord&logoColor=white)](https://discord.com/users/870659061308342312)
 
-[![Discord Presence](https://lanyard.cnrad.dev/api/870659061308342312)](https://discord.com/users/870659061308342312)
+[![Discord Presence](https://lanyard.cnrad.dev/api/870659061308342312/?idleMessage=Wishing%20everyone%20who%20reads%20this%20a%20wonderful%20day!)](https://discord.com/users/870659061308342312)
 
 ---
 
