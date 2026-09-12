@@ -22,9 +22,10 @@
 
 ---
 
-### 🎵 Currently Listening
+### 💬 My Discord
+[![Discord](https://img.shields.io/badge/Discord-5865F2.svg?style=for-the-badge&logo=discord&logoColor=white)](https://discord.com/users/870659061308342312)
 
-[![spotify-github-profile](https://spotify-github-profile.kittinanx.com/api/view?uid=31qnlveslag2swhmuyymkswjeudy&cover_image=true&theme=natemoo-re&show_offline=true&background_color=121212&interchange=false&profanity=false&hide_remaster=false&bar_color=53b14f&bar_color_cover=false)](https://spotify-github-profile.kittinanx.com/api/view?uid=31qnlveslag2swhmuyymkswjeudy&redirect=true)
+[![Discord Presence](https://lanyard.cnrad.dev/api/870659061308342312)](https://discord.com/users/870659061308342312)
 
 ---
 
