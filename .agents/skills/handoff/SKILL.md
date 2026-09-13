@@ -5,7 +5,7 @@ argument-hint: "What will the next session be used for?"
 disable-model-invocation: true
 ---
 
-Write a handoff document summarising the current conversation so a fresh agent can continue the work. Save to the temporary directory of the user's OS - not the current workspace.
+Write a handoff document summarising the current conversation so a fresh agent can continue the work. Save to `.scratch/handoff/` in the current workspace (create the directory if it does not exist). The markdown file name must be prefixed with a timestamp (format: `YYYYMMDD_HHMMSS-<name>.md`, e.g. `.scratch/handoff/20260913_161500-handoff.md`) so the latest context can easily be sorted and reloaded.
 
 Include a "suggested skills" section in the document, naming which skills the next agent should call the Skill tool for.
 
