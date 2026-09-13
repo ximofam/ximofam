@@ -64,7 +64,7 @@ export function renderTopTracks(data, options = {}) {
   const rowHeight = 48;
   const headerHeight = 52;
   const bottomPadding = 8;
-  const visibleCount = 4; // Show top 4 at a time
+  const visibleCount = Math.max(1, Math.min(10, parseInt(options.visibleCount || options.count, 10) || 4));
 
   // Determine if auto-scroll is needed
   const shouldScroll = contentTracks.length > visibleCount;

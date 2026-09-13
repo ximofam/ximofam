@@ -12,6 +12,7 @@ export default async function handler(req, res) {
     const range = query.range || 'short_term';
     const limit = parseInt(query.limit, 10) || 10;
     const theme = query.theme || 'dark';
+    const count = query.count ? parseInt(query.count, 10) : (query.visible ? parseInt(query.visible, 10) : undefined);
 
     const data = await getTopTracks(range, limit);
 
@@ -23,7 +24,7 @@ export default async function handler(req, res) {
     }
 
     // Render SVG
-    const svg = renderTopTracks(data, { theme });
+    const svg = renderTopTracks(data, { theme, visibleCount: count });
 
     // Cache for 1 hour since top tracks do not change by the second
     setCacheHeaders(res, 'image/svg+xml; charset=utf-8', 3600, 7200);

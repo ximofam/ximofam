@@ -8,7 +8,7 @@ import { parseQueryParams, setNoCacheHeaders } from './lib/utils.js';
 export default async function handler(req, res) {
   try {
     const query = parseQueryParams(req);
-    const tz = query.tz || 'Asia/Ho_Chi_Minh';
+    const tz = query.tz || req.headers?.['x-vercel-ip-timezone'] || 'Asia/Ho_Chi_Minh';
     const theme = query.theme || 'dark';
     const is12Hour = query.format === '12';
     const scale = query.scale ? parseFloat(query.scale) : 1;

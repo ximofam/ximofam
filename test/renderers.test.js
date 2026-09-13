@@ -114,4 +114,19 @@ describe('renderTopTracks (Top Tracks Carousel)', () => {
     assert.match(svg, /Top Spotify Tracks/);
     assert.match(svg, /Insufficient client scope/);
   });
+
+  it('supports custom visibleCount to reduce card height', () => {
+    const svg = renderTopTracks(
+      {
+        status: 'success',
+        timeRange: 'short_term',
+        tracks: sampleTracks,
+      },
+      { visibleCount: 1 }
+    );
+
+    // Height should be 52 (header) + 48 (1 row) + 8 (padding) = 108
+    assert.match(svg, /height="108"/);
+    assert.match(svg, /track-scroller/);
+  });
 });
