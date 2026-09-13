@@ -11,7 +11,7 @@
     <th width="30%" align="center">⏰ Current Time</th>
     <th width="70%" align="left">
       <!-- DAILY_QUOTE_HEADER:START -->
-      💬 Quote of the Day &nbsp; <sub>💬 Status: <em>:face_with_peeking_eye: Nếu một mai tôi có bay lên trời thì người ơi tôi đã sống rất thảnh thơi</em> • 🤖 Provider: <code>gemini-3.6-flash</code> • 🕒 Updated: <code>2026-09-13 18:25:24 (GMT+7)</code></sub>
+      💬 Quote of the Day &nbsp; <sub>💬 Status: <em>:disappointed: Đếm ngày thất nghiệp</em> • 🤖 Provider: <code>offline-fallback</code> • 🕒 Updated: <code>2026-09-14 02:06:34 (GMT+7)</code></sub>
       <!-- DAILY_QUOTE_HEADER:END -->
     </th>
   </tr>
@@ -24,10 +24,10 @@
     <td width="70%" align="left" valign="middle">
       <!-- DAILY_QUOTE:START -->
       <p align="left">
-        <em>“Sống không nuối tiếc, yêu không tính toán; khi lòng đã an nhiên thì từng khoảnh khắc trôi qua đều là một món quà trọn vẹn.”</em>
+        <em>“Cuộc sống là những gì diễn ra khi ta đang bận rộn với các kế hoạch khác.”</em>
       </p>
       <p align="right">
-        — <strong>AI Inspiration</strong>
+        — <strong>John Lennon</strong>
       </p>
       <!-- DAILY_QUOTE:END -->
     </td>
