@@ -31,3 +31,11 @@ _Avoid_: Time widget, clock app, analog clock
 **Terminal HUD**:
 A tech-inspired digital display aesthetic featuring monospace typography, blinking colons, live status indicator, and minimalist terminal framing.
 _Avoid_: Watch face, dial display
+
+**LLM Quote Generator**:
+A serverless REST endpoint that prompts OpenAI-compatible models to generate contextual coding, life, or mood-resonant quotations with runtime model attribution.
+_Avoid_: AI text generator, random quote bot
+
+**Quote Fallback Catalog**:
+A curated collection of offline quotations categorized by topic and language, served immediately when LLM credentials are absent or remote calls fail.
+_Avoid_: Static quotes, hardcoded strings

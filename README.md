@@ -83,7 +83,49 @@ Mở đường link in ra trong terminal, đăng nhập và nhấn **Agree**. Sc
 
 ---
 
-## 💻 3. Chạy thử nghiệm trên máy cục bộ (Local Preview)
+## 🤖 3. LLM Quote Generator API (`/quote`)
+
+REST API sinh câu danh ngôn lập trình, cuộc sống hoặc động lực theo ngữ cảnh tâm trạng/trạng thái (`status`) của người dùng, hỗ trợ chuyển đổi linh hoạt giữa các nhà cung cấp **Google Gemini**, **Groq**, **Anthropic Claude**, **OpenAI**, **DeepSeek**:
+
+### Endpoint:
+```
+GET /quote
+GET /api/quote
+```
+
+### Tham số Query Parameters:
+| Tham số | Mặc định | Ý nghĩa |
+| :--- | :--- | :--- |
+| `topic` | `coding` | Chủ đề quote: `coding`, `life`, `motivation`, `humor`. |
+| `status` | `null` | Ngữ cảnh hoặc tâm trạng (vd: `fixing bugs`, `deploying to production`, `tired`). |
+| `lang` | `en` | Ngôn ngữ câu quote: `en` (Tiếng Anh) hoặc `vi` (Tiếng Việt). |
+| `tone` | `inspirational` | Giọng điệu: `inspirational`, `philosophical`, `humorous`, `sarcastic`. |
+| `provider` | `auto` | Chỉ định provider: `gemini`, `groq`, `claude`, `openai` (nếu có cấu hình API Key tương ứng). |
+
+### Ví dụ phản hồi JSON:
+```json
+{
+  "quote": "Code is like humor. When you have to explain it, it’s bad.",
+  "author": "Cory House",
+  "topic": "coding",
+  "status": "fixing bugs",
+  "model": "gemini-3.6-flash",
+  "language": "en",
+  "timestamp": 1726215600000
+}
+```
+
+> [!TIP]
+> **Hỗ trợ đa nhà cung cấp (Multi-Provider):**
+> - **Google Gemini**: Thêm `GEMINI_API_KEY` (khuyên dùng, miễn phí từ Google AI Studio, model mặc định: `gemini-3.6-flash`).
+> - **Groq**: Thêm `GROQ_API_KEY` (tốc độ ~500ms, model mặc định: `llama-3.3-70b-versatile`).
+> - **Anthropic Claude**: Thêm `ANTHROPIC_API_KEY` (model mặc định: `claude-3-5-haiku-20241022`).
+> - **OpenAI**: Thêm `OPENAI_API_KEY` (model mặc định: `gpt-4o-mini`).
+> - **Offline Fallback:** Nếu chưa cấu hình bất kỳ API Key nào, API tự động trả về câu quote phong phú từ kho offline với `"model": "offline-fallback"`.
+
+---
+
+## 💻 4. Chạy thử nghiệm trên máy cục bộ (Local Preview)
 
 ```bash
 yarn server
@@ -97,18 +139,17 @@ Mở trình duyệt truy cập: [http://localhost:3000](http://localhost:3000)
 
 ## 🚀 4. Hướng dẫn Deploy lên Vercel (1-Click)
 
-Dự án đã được cấu hình file [vercel.json](vercel.json) tự động rewrite route (`/clock`, `/spotify`, `/top-tracks`) sẵn sàng deploy:
+Dự án đã được cấu hình file [vercel.json](vercel.json) tự động rewrite route (`/clock`, `/quote`, `/spotify`, `/top-tracks`) sẵn sàng deploy:
 
 1. Đẩy mã nguồn lên repository GitHub của bạn:
    ```bash
    git push origin main
    ```
 2. Truy cập [vercel.com](https://vercel.com), bấm **Add New Project** và chọn repository này.
-3. Nếu bạn sử dụng tính năng **Spotify**, vào mục **Environment Variables** thêm 3 biến từ file `.env`:
-   - `SPOTIFY_CLIENT_ID`
-   - `SPOTIFY_CLIENT_SECRET`
-   - `SPOTIFY_REFRESH_TOKEN`
-   *(Nếu bạn chỉ sử dụng **Clock Widget**, bạn hoàn toàn không cần cấu hình thêm biến môi trường nào!)*
+3. Cấu hình biến môi trường tại mục **Environment Variables** (nếu dùng):
+   - **Spotify**: `SPOTIFY_CLIENT_ID`, `SPOTIFY_CLIENT_SECRET`, `SPOTIFY_REFRESH_TOKEN`
+   - **LLM Quote (tùy chọn)**: `LLM_API_KEY`, `LLM_BASE_URL` (nếu dùng Groq/DeepSeek), `LLM_MODEL`
+   *(Nếu bạn chỉ sử dụng **Clock Widget** hoặc dùng Quote với danh mục offline fallback, bạn hoàn toàn không cần cấu hình thêm biến môi trường nào!)*
 4. Nhấn **Deploy**. Bạn sẽ nhận được URL public (ví dụ: `https://my-github-widget.vercel.app`).
 
 ---

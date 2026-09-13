@@ -3,6 +3,7 @@ import http from 'node:http';
 import spotifyHandler from './api/spotify.js';
 import topTracksHandler from './api/top-tracks.js';
 import clockHandler from './api/clock.js';
+import quoteHandler from './api/quote.js';
 import { loadEnv } from './api/lib/spotify.js';
 
 loadEnv();
@@ -15,6 +16,11 @@ const server = http.createServer(async (req, res) => {
   // Route: /api/clock and /clock (Terminal HUD Clock)
   if (reqUrl.pathname === '/api/clock' || reqUrl.pathname === '/clock') {
     return clockHandler(req, res);
+  }
+
+  // Route: /api/quote and /quote (LLM Quote API)
+  if (reqUrl.pathname === '/api/quote' || reqUrl.pathname === '/quote') {
+    return quoteHandler(req, res);
   }
 
   // Route: /api/spotify and /spotify (Currently Playing Presence)
@@ -188,6 +194,20 @@ const server = http.createServer(async (req, res) => {
             </script>
           </div>
 
+          <!-- 4. LLM QUOTE API -->
+          <div class="section-title">4. LLM Quote Generator (API sinh câu quote thông minh)</div>
+          <div class="preview-box">
+            <h3 style="margin-top:0; color:#8b949e;">REST JSON API: /quote</h3>
+            <p style="color:#c9d1d9; font-size: 14px;">Sinh câu danh ngôn truyền cảm hứng theo lập trình, cuộc sống và trạng thái người dùng (kèm model LLM sinh ra):</p>
+            <div class="links">
+              <a class="btn primary" href="/quote" target="_blank">Gọi API mặc định (/quote)</a>
+              <a class="btn" href="/quote?topic=coding&lang=vi" target="_blank">Code (Tiếng Việt)</a>
+              <a class="btn" href="/quote?topic=life" target="_blank">Life Quote</a>
+              <a class="btn" href="/quote?status=fixing+memory+leak+late+at+night&tone=humorous" target="_blank">Status: Fixing Bug (Humor)</a>
+              <a class="btn" href="/quote?topic=motivation&lang=vi" target="_blank">Động lực (Tiếng Việt)</a>
+            </div>
+          </div>
+
           <!-- USAGE IN README -->
           <div class="section-title">📋 Cách chèn vào GitHub Profile README.md</div>
           <p style="color:#8b949e; font-size: 14px;">Thay <code>YOUR_APP_URL</code> bằng domain Vercel sau khi bạn deploy:</p>
@@ -218,8 +238,9 @@ const server = http.createServer(async (req, res) => {
 });
 
 server.listen(PORT, () => {
-  console.log(`🚀 Spotify & Clock Server đang chạy tại: http://localhost:${PORT}`);
+  console.log(`🚀 Spotify, Clock & Quote Server đang chạy tại: http://localhost:${PORT}`);
   console.log(`👉 Xem trước Widgets: http://localhost:${PORT}`);
+  console.log(`👉 API Quote (LLM): http://localhost:${PORT}/quote`);
   console.log(`👉 API Clock: http://localhost:${PORT}/clock`);
   console.log(`👉 API Presence: http://localhost:${PORT}/spotify`);
   console.log(`👉 API Top Tracks: http://localhost:${PORT}/top-tracks`);
