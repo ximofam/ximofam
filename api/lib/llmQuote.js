@@ -4,7 +4,7 @@ import OFFLINE_QUOTES from '../../docs/offline_quotes.json' with { type: 'json' 
 
 const DEFAULT_MODELS = {
   gemini: 'gemini-3.6-flash',
-  groq: 'llama-3.3-70b-versatile',
+  groq: 'openai/gpt-oss-20b',
   claude: 'claude-3-5-haiku-20241022',
   openai: 'gpt-4o-mini',
 };
@@ -361,8 +361,9 @@ async function callOpenAiCompatible({ apiKey, baseUrl, model, messages, signal, 
     body: JSON.stringify({
       model,
       messages,
-      temperature: 0.8,
-      max_tokens: 200,
+      temperature: 0.7,
+      max_tokens: 1000,
+      response_format: { type: 'json_object' },
     }),
     signal,
   });

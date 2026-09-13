@@ -60,7 +60,7 @@ describe('LLM Quote Generator', () => {
       const config = resolveProviderConfig({ env: { GROQ_API_KEY: 'gsk-123' } });
       assert.equal(config.provider, 'groq');
       assert.equal(config.apiKey, 'gsk-123');
-      assert.equal(config.model, 'llama-3.3-70b-versatile');
+      assert.equal(config.model, 'openai/gpt-oss-20b');
     });
 
     it('auto-detects Claude from ANTHROPIC_API_KEY', () => {
