@@ -17,7 +17,6 @@ export default async function handler(req, res) {
 
     const now = new Date();
 
-    // 1. If format=json, return raw structured JSON data
     if (query.format === 'json') {
       const data = formatClockData(now, tz, is12Hour);
       setNoCacheHeaders(res, 'application/json; charset=utf-8');
@@ -35,7 +34,6 @@ export default async function handler(req, res) {
       return;
     }
 
-    // 2. Default: Render Terminal HUD Clock SVG with strict zero-cache
     const svg = renderClockSvg({
       date: now,
       timezone: tz,

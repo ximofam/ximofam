@@ -161,28 +161,24 @@ export function renderClockSvg({
   const minDelay = startSec > 0 ? `-${startSec}s` : '0s';
   const hrDelay = elapsedInHour > 0 ? `-${elapsedInHour}s` : '0s';
 
-  // 1. Build Seconds Reel (61 items)
   let secondsRows = '';
   for (let i = 0; i <= 60; i++) {
     const s = (startSec + i) % 60;
     secondsRows += `<text x="210" y="${58 + i * rowHeight}" text-anchor="middle" class="digit" fill="${colors.digits}">${pad(s)}</text>\n`;
   }
 
-  // 2. Build Minutes Reel (61 items)
   let minutesRows = '';
   for (let i = 0; i <= 60; i++) {
     const m = (startMin + i) % 60;
     minutesRows += `<text x="140" y="${58 + i * rowHeight}" text-anchor="middle" class="digit" fill="${colors.digits}">${pad(m)}</text>\n`;
   }
 
-  // 3. Build Hours Reel (hrCount + 1 items)
   let hoursRows = '';
   for (let i = 0; i <= hrCount; i++) {
     const h = is12Hour ? ((startHr - 1 + i) % hrCount) + 1 : (startHr + i) % hrCount;
     hoursRows += `<text x="70" y="${58 + i * rowHeight}" text-anchor="middle" class="digit" fill="${colors.digits}">${pad(h)}</text>\n`;
   }
 
-  // Background rect
   const bgRect =
     colors.bg === 'none'
       ? `<rect width="${baseW}" height="${baseH}" rx="8" fill="none" stroke="${colors.border}" stroke-width="1" />`
@@ -197,12 +193,10 @@ export function renderClockSvg({
     ? `<text x="246" y="58" class="period" fill="${colors.period}">${escapeXml(clock.period)}</text>`
     : '';
 
-  // Short timezone label for header
   const tzLabel = escapeXml(clock.timezone.split('/').pop()?.replace(/_/g, ' ') || clock.timezone);
 
   return `<svg width="${finalWidth}" height="${finalHeight}" viewBox="0 0 ${baseW} ${baseH}" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <!-- Viewport clip path to constrain visible digits to one crisp row -->
     <clipPath id="digits-viewport">
       <rect x="10" y="24" width="260" height="${rowHeight + 4}" />
     </clipPath>
@@ -265,10 +259,7 @@ export function renderClockSvg({
     }
   </style>
 
-  <!-- Terminal Frame -->
   ${bgRect}
-
-  <!-- Terminal Header Bar with macOS Window Dots -->
   ${headerBgRect}
   <line x1="0" y1="22" x2="${baseW}" y2="22" stroke="${colors.border}" stroke-width="0.8" />
   <circle cx="14" cy="11.5" r="3.2" fill="#FF5F56" />
@@ -276,25 +267,18 @@ export function renderClockSvg({
   <circle cx="34" cy="11.5" r="3.2" fill="#27C93F" />
   <text x="${baseW - 14}" y="14.5" text-anchor="end" class="hud-title">clock.sh · ${tzLabel}</text>
 
-  <!-- Digits Viewport (Hours, Minutes, Seconds) -->
   <g clip-path="url(#digits-viewport)">
-    <!-- Hours Reel -->
     <g class="reel-hours">
       ${hoursRows}
     </g>
-
-    <!-- Minutes Reel -->
     <g class="reel-minutes">
       ${minutesRows}
     </g>
-
-    <!-- Seconds Reel -->
     <g class="reel-seconds">
       ${secondsRows}
     </g>
   </g>
 
-  <!-- Static Colons & Period -->
   <text x="105" y="56" text-anchor="middle" class="colon">:</text>
   <text x="175" y="56" text-anchor="middle" class="colon">:</text>
   ${periodSvg}
