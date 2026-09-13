@@ -18,7 +18,7 @@
   <tr>
     <td width="30%" align="center" valign="middle">
       <a href="https://github.com/ximofam">
-        <img src="https://my-github-widget.vercel.app/clock?theme=matrix" alt="Terminal Clock" width="100%" />
+        <img src="https://my-github-widget.vercel.app/clock?tz=Asia/Ho_Chi_Minh" alt="Terminal Clock" width="100%" />
       </a>
     </td>
     <td width="70%" align="left" valign="middle">
@@ -47,7 +47,7 @@
     </td>
     <td width="50%" align="center" valign="middle">
       <a href="https://open.spotify.com">
-        <img src="https://my-github-widget.vercel.app/top-tracks?range=long_term&count=1" alt="Top Tracks" width="100%" />
+        <img src="https://my-github-widget.vercel.app/top-tracks?range=long_term&count=4" alt="Top Tracks" width="100%" />
       </a>
     </td>
   </tr>
