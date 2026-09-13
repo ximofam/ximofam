@@ -11,7 +11,7 @@
     <th width="30%" align="center">⏰ Current Time</th>
     <th width="70%" align="left">
       <!-- DAILY_QUOTE_HEADER:START -->
-      💬 Quote of the Day &nbsp; <sub>💬 Status: <em>:face_with_peeking_eye: Nếu một mai tôi có bay lên trời thì người ơi tôi đã sống rất thảnh thơi</em> • 🤖 Provider: <code>offline-fallback</code> • 🕒 Updated: <code>2026-09-13 17:30:40 (GMT+7)</code></sub>
+      💬 Quote of the Day &nbsp; <sub>💬 Status: <em>:face_with_peeking_eye: Nếu một mai tôi có bay lên trời thì người ơi tôi đã sống rất thảnh thơi</em> • 🤖 Provider: <code>offline-fallback</code> • 🕒 Updated: <code>2026-09-13 18:22:35 (GMT+7)</code></sub>
       <!-- DAILY_QUOTE_HEADER:END -->
     </th>
   </tr>
@@ -24,10 +24,10 @@
     <td width="70%" align="left" valign="middle">
       <!-- DAILY_QUOTE:START -->
       <p align="left">
-        <em>“Hạnh phúc không phải là thứ có sẵn. Nó đến từ chính hành động của bạn.”</em>
+        <em>“Hãy làm những gì bạn có thể, với những gì bạn có, ở bất cứ nơi đâu bạn đứng.”</em>
       </p>
       <p align="right">
-        — <strong>Dalai Lama</strong>
+        — <strong>Theodore Roosevelt</strong>
       </p>
       <!-- DAILY_QUOTE:END -->
     </td>
