@@ -1,0 +1,48 @@
+name: Daily Profile Quote
+
+on:
+  schedule:
+    # Chạy vào lúc 00:00 (12 giờ đêm) hàng ngày theo giờ Việt Nam (UTC+7) = 17:00 UTC
+    - cron: '0 17 * * *'
+  workflow_dispatch: # Cho phép trigger thủ công từ giao diện GitHub Actions
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-quote-generator
+  cancel-in-progress: true
+
+jobs:
+  update-quote:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Generate Quote and Update README
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_USERNAME: ${{ github.repository_owner }}
+          QUOTE_API_URL: ${{ vars.QUOTE_API_URL || secrets.QUOTE_API_URL || 'https://my-github-widget.vercel.app/quote' }}
+        run: |
+          node ./scripts/generate_quote.js
+
+      - name: Commit and push if README changed
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          if git diff --staged --quiet; then
+            echo "No changes detected in README.md. Skipping commit."
+          else
+            git commit -m "docs(readme): update daily quote [skip ci]"
+            git push origin main
+          fi
