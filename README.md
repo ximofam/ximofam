@@ -1,80 +1,124 @@
-# 🎵 Spotify Widgets for GitHub Profile
+# ⚡ GitHub Profile Widgets (Spotify & Terminal Ticking Clock)
 
-Bộ API tích hợp Spotify đọc cấu hình từ `.env` và tự động render các thẻ card SVG tuyệt đẹp để nhúng vào GitHub Profile README:
-1. **Spotify Presence:** Thẻ trạng thái bài hát đang nghe theo thời gian thực (kèm hiệu ứng Equalizer sóng nhạc chuyển động) hoặc bài nghe gần nhất.
-2. **Top Tracks:** Thẻ danh sách bài hát bạn nghe nhiều nhất (Top 5 / Top 10, tùy chọn 4 tuần qua, 6 tháng qua hoặc toàn thời gian).
+Bộ sưu tập widget SVG động theo thời gian thực (Zero-Cache) để gắn vào GitHub Profile README:
+
+1. **⏱️ Terminal Ticking Clock:** Đồng hồ phong cách cửa sổ Terminal tối giản (macOS style với 3 chấm màu), **nhảy số đếm Giờ : Phút : Giây thực tế** bằng Pure CSS `@keyframes` cascading reels, hỗ trợ co giãn tỉ lệ `scale`, tùy chỉnh `width`/`height`, mọi múi giờ IANA và đa dạng theme (`matrix`, `cyberpunk`, `dark`, `light`, `transparent`).
+2. **🎵 Spotify Presence:** Thẻ trạng thái bài hát đang nghe theo thời gian thực (kèm hiệu ứng sóng nhạc Equalizer) hoặc bài nghe gần nhất.
+3. **🏆 Spotify Top Tracks:** Thẻ danh sách bài hát bạn nghe nhiều nhất với hiệu ứng cuộn tự động (Infinite Auto-Scroll Carousel) và dừng khi rê chuột (Carousel Inspection).
 
 ---
 
-## 🚀 Các bước cài đặt & sử dụng
+## ⏱️ 1. Widget Đồng hồ Terminal Đếm Giờ Thực (Terminal Ticking Clock)
 
-### 1. Cấu hình Spotify Developer Dashboard
-1. Truy cập [Spotify Developer Dashboard](https://developer.spotify.com/dashboard) và chọn ứng dụng của bạn.
-2. Vào mục **Settings** -> **Redirect URIs**.
-3. Thêm URI sau:
+Đồng hồ chạy trực tiếp trên GitHub README mà không cần JavaScript. Sử dụng kỹ thuật dải cuộn số CSS (Cascading Digit Reels) đồng bộ chính xác:
+- **Giây**: Nhảy số từng giây một (`steps(60)`).
+- **Phút**: Tự động bước sang phút mới ngay khi giây chạm `59 ➔ 00`.
+- **Giờ**: Tự động bước sang giờ mới ngay khi phút chạm `59 ➔ 00`.
+
+### Cú pháp nhúng vào GitHub Profile `README.md`:
+
+```markdown
+![Terminal Clock](https://YOUR_APP_URL/clock?theme=dark&tz=Asia/Ho_Chi_Minh)
+```
+
+Hoặc gắn link mở trang chủ preview khi click:
+
+```markdown
+[![Terminal Clock](https://YOUR_APP_URL/clock?theme=matrix&tz=Asia/Ho_Chi_Minh&scale=1.1)](https://YOUR_APP_URL)
+```
+
+### Các Query Parameters tùy chỉnh:
+
+| Tham số | Giá trị | Mặc định | Ý nghĩa |
+| :--- | :--- | :--- | :--- |
+| `tz` | Múi giờ IANA (vd: `Asia/Ho_Chi_Minh`, `Asia/Tokyo`, `America/New_York`, `Europe/London`, `UTC`) | `Asia/Ho_Chi_Minh` | Múi giờ hiển thị của đồng hồ. Tự động fallback nếu nhập sai. |
+| `scale` | Số thực (vd: `0.8`, `1.0`, `1.2`, `1.5`) | `1.0` | Tự động co giãn toàn bộ kích thước đồng hồ theo tỉ lệ cân đối. |
+| `width` | Số nguyên pixel (vd: `280`, `350`) | `280` | Chiều rộng tùy chỉnh. |
+| `height` | Số nguyên pixel (vd: `85`, `100`) | `85` | Chiều cao tùy chỉnh. |
+| `theme` | `dark`, `light`, `matrix`, `cyberpunk`, `transparent` | `dark` | Bảng màu giao diện: Matrix (xanh hacker neon), Cyberpunk (hồng/cyan), Nền trong suốt,... |
+| `format` | `24`, `12`, `json` | `24` | Định dạng 24 giờ (`14:30:45`), 12 giờ kèm AM/PM (`02:30:45 PM`) hoặc trả về JSON. |
+
+#### Ví dụ đường dẫn:
+- Múi giờ Việt Nam (Dark Theme chuẩn): `https://YOUR_APP_URL/clock`
+- Phóng to 1.2 lần (Hacker Matrix Theme): `https://YOUR_APP_URL/clock?theme=matrix&scale=1.2`
+- Nhỏ gọn 0.8 lần: `https://YOUR_APP_URL/clock?scale=0.8`
+- Cyberpunk Neon Theme (New York): `https://YOUR_APP_URL/clock?theme=cyberpunk&tz=America/New_York`
+- Định dạng 12 giờ (AM/PM): `https://YOUR_APP_URL/clock?format=12`
+- Nền trong suốt (Transparent): `https://YOUR_APP_URL/clock?theme=transparent`
+
+> [!NOTE]
+> **Khả năng đếm giờ thực tế trên GitHub:**
+> Nhờ kỹ thuật CSS animation cascading reels, khi người xem mở trang cá nhân GitHub của bạn, **số giây sẽ nhảy liên tục từng giây một, phút và giờ sẽ tự động nhảy số khi hết chu kỳ**. Server luôn trả về header `no-cache` để mỗi lần tải lại trang hoặc proxy làm mới là đồng hồ lập tức đồng bộ theo mốc giờ mới nhất của server.
+
+---
+
+## 🎵 2. Spotify Widgets Setup
+
+### Bước 1: Cấu hình Spotify Developer Dashboard
+1. Truy cập [Spotify Developer Dashboard](https://developer.spotify.com/dashboard) và tạo/chọn app.
+2. Vào mục **Settings** -> **Redirect URIs**, thêm URI:
    ```
    http://127.0.0.1:8888/callback
    ```
-4. Nhấn **Add** và nhấn **Save** ở cuối trang.
+3. Nhấn **Save**.
 
----
-
-### 2. Cấp quyền & Lấy `SPOTIFY_REFRESH_TOKEN`
-Chạy lệnh sau tại thư mục `my-github-widget`:
-
+### Bước 2: Lấy Refresh Token
 ```bash
 yarn auth
 # hoặc npm run auth
 ```
+Mở đường link in ra trong terminal, đăng nhập và nhấn **Agree**. Script sẽ tự động lấy `SPOTIFY_REFRESH_TOKEN` và lưu vào file `.env`.
 
-Script sẽ in ra đường link cấp quyền bao gồm cả quyền xem playback và top tracks (`user-read-currently-playing`, `user-read-playback-state`, `user-read-recently-played`, `user-top-read`). 
+### Bước 3: Cú pháp nhúng Spotify vào README:
 
-Mở link trên trình duyệt, đăng nhập và nhấn **Agree**. Script sẽ tự động lấy `refresh_token` và ghi đè vào file `.env`!
+#### 🎧 Bài hát đang nghe (Presence):
+```markdown
+[![Spotify Presence](https://YOUR_APP_URL/spotify)](https://YOUR_APP_URL/spotify?redirect=true)
+```
+
+#### 📜 Top bài hát yêu thích (Top Tracks):
+```markdown
+![Top Tracks](https://YOUR_APP_URL/top-tracks?range=short_term)
+```
 
 ---
 
-### 3. Chạy thử nghiệm trên máy (Local)
+## 💻 3. Chạy thử nghiệm trên máy cục bộ (Local Preview)
 
 ```bash
 yarn server
 # hoặc npm run server
 ```
 
-- **Trang xem trước tổng quan:** [http://localhost:3000](http://localhost:3000)
-- **API Presence (Đang nghe):** [http://localhost:3000/api/spotify](http://localhost:3000/api/spotify)
-- **API Top Tracks (Nghe nhiều nhất):** [http://localhost:3000/api/top-tracks](http://localhost:3000/api/top-tracks)
-- **Tùy chọn Top Tracks:**
-  - 4 tuần qua: `http://localhost:3000/api/top-tracks?range=short_term`
-  - 6 tháng qua: `http://localhost:3000/api/top-tracks?range=medium_term`
-  - Toàn thời gian: `http://localhost:3000/api/top-tracks?range=long_term`
-  - Số lượng bài: `http://localhost:3000/api/top-tracks?limit=5` (hoặc 10)
-  - Light theme: `http://localhost:3000/api/top-tracks?theme=light`
-  - Raw JSON: `http://localhost:3000/api/top-tracks?format=json`
+Mở trình duyệt truy cập: [http://localhost:3000](http://localhost:3000)
+- Trang chủ tích hợp sẵn bộ xem trước trực quan cho tất cả widget (Đồng hồ chạy nhảy giây trực tiếp, test đổi theme/múi giờ và thẻ Spotify).
 
 ---
 
-### 4. Deploy lên Vercel (Miễn phí & Serverless)
+## 🚀 4. Hướng dẫn Deploy lên Vercel (1-Click)
 
-1. Đẩy thư mục hoặc repository lên GitHub.
-2. Truy cập [vercel.com](https://vercel.com) và Import repository.
-3. Vào phần **Environment Variables**, thêm 3 biến từ `.env`:
+Dự án đã được cấu hình file [vercel.json](vercel.json) tự động rewrite route (`/clock`, `/spotify`, `/top-tracks`) sẵn sàng deploy:
+
+1. Đẩy mã nguồn lên repository GitHub của bạn:
+   ```bash
+   git push origin main
+   ```
+2. Truy cập [vercel.com](https://vercel.com), bấm **Add New Project** và chọn repository này.
+3. Nếu bạn sử dụng tính năng **Spotify**, vào mục **Environment Variables** thêm 3 biến từ file `.env`:
    - `SPOTIFY_CLIENT_ID`
    - `SPOTIFY_CLIENT_SECRET`
    - `SPOTIFY_REFRESH_TOKEN`
-4. Bấm **Deploy**. Bạn sẽ nhận được URL production (ví dụ `https://my-github-widget.vercel.app`).
+   *(Nếu bạn chỉ sử dụng **Clock Widget**, bạn hoàn toàn không cần cấu hình thêm biến môi trường nào!)*
+4. Nhấn **Deploy**. Bạn sẽ nhận được URL public (ví dụ: `https://my-github-widget.vercel.app`).
 
 ---
 
-### 5. Thêm vào GitHub Profile `README.md`
+## 🧪 5. Chạy Kiểm thử & Lint
 
-Dán đoạn mã sau vào file `README.md` (thay `YOUR_APP_URL` bằng domain Vercel của bạn):
+```bash
+# Chạy bộ test tự động (Node.js Test Runner)
+npm test
 
-#### 🎵 1. Thẻ bài hát đang nghe:
-```markdown
-[![Spotify Presence](https://YOUR_APP_URL/api/spotify)](https://YOUR_APP_URL/api/spotify?redirect=true)
-```
-
-#### 🏆 2. Thẻ top bài hát nghe nhiều nhất:
-```markdown
-[![Top Tracks](https://YOUR_APP_URL/api/top-tracks?range=short_term&limit=5)](https://open.spotify.com)
+# Kiểm tra cú pháp và quy chuẩn code
+npm run lint
 ```

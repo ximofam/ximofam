@@ -23,3 +23,11 @@ _Avoid_: Popular songs, favorite music
 **Carousel Inspection**:
 The interaction state where hovering over a Top Tracks widget freezes the auto-scrolling animation, toggles the badge to paused, and highlights the focused track row.
 _Avoid_: Mouse pause, track hover
+
+**Clock Widget**:
+A real-time, zero-cache serverless SVG clock displaying hours, minutes, and seconds for a specified IANA timezone.
+_Avoid_: Time widget, clock app, analog clock
+
+**Terminal HUD**:
+A tech-inspired digital display aesthetic featuring monospace typography, blinking colons, live status indicator, and minimalist terminal framing.
+_Avoid_: Watch face, dial display

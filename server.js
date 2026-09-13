@@ -2,6 +2,7 @@
 import http from 'node:http';
 import spotifyHandler from './api/spotify.js';
 import topTracksHandler from './api/top-tracks.js';
+import clockHandler from './api/clock.js';
 import { loadEnv } from './api/lib/spotify.js';
 
 loadEnv();
@@ -11,13 +12,18 @@ const PORT = process.env.PORT || 3000;
 const server = http.createServer(async (req, res) => {
   const reqUrl = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
 
-  // Route: /api/spotify (Currently Playing Presence)
-  if (reqUrl.pathname === '/api/spotify') {
+  // Route: /api/clock and /clock (Terminal HUD Clock)
+  if (reqUrl.pathname === '/api/clock' || reqUrl.pathname === '/clock') {
+    return clockHandler(req, res);
+  }
+
+  // Route: /api/spotify and /spotify (Currently Playing Presence)
+  if (reqUrl.pathname === '/api/spotify' || reqUrl.pathname === '/spotify') {
     return spotifyHandler(req, res);
   }
 
-  // Route: /api/top-tracks (Frequently Played Tracks)
-  if (reqUrl.pathname === '/api/top-tracks') {
+  // Route: /api/top-tracks and /top-tracks (Frequently Played Tracks)
+  if (reqUrl.pathname === '/api/top-tracks' || reqUrl.pathname === '/top-tracks') {
     return topTracksHandler(req, res);
   }
 
@@ -157,18 +163,48 @@ const server = http.createServer(async (req, res) => {
             </div>
           </div>
 
+          <!-- 3. CLOCK WIDGET -->
+          <div class="section-title">3. Terminal HUD Clock (Đồng hồ động thời gian thực)</div>
+          <div class="preview-box">
+            <h3 style="margin-top:0; color:#8b949e;">Múi giờ Việt Nam (Asia/Ho_Chi_Minh)</h3>
+            <img id="clock-img" src="/clock?t=${Date.now()}" alt="Clock Widget" />
+
+            <div class="links">
+              <a class="btn primary" href="/clock" target="_blank">Xem ảnh SVG (/clock)</a>
+              <a class="btn" href="/clock?theme=matrix" target="_blank">Matrix Theme</a>
+              <a class="btn" href="/clock?theme=cyberpunk" target="_blank">Cyberpunk Theme</a>
+              <a class="btn" href="/clock?theme=light" target="_blank">Light Theme</a>
+              <a class="btn" href="/clock?tz=America/New_York" target="_blank">New York (EDT)</a>
+              <a class="btn" href="/clock?tz=Asia/Tokyo" target="_blank">Tokyo (JST)</a>
+              <a class="btn" href="/clock?format=12" target="_blank">12h (AM/PM)</a>
+              <a class="btn" href="/clock?format=json" target="_blank">Dữ liệu JSON</a>
+            </div>
+            <script>
+              // Auto-refresh preview every 1 second on dev page
+              setInterval(() => {
+                const img = document.getElementById('clock-img');
+                if (img) img.src = '/clock?t=' + Date.now();
+              }, 1000);
+            </script>
+          </div>
+
           <!-- USAGE IN README -->
           <div class="section-title">📋 Cách chèn vào GitHub Profile README.md</div>
           <p style="color:#8b949e; font-size: 14px;">Thay <code>YOUR_APP_URL</code> bằng domain Vercel sau khi bạn deploy:</p>
           
+          <h4 style="color:#c9d1d9; margin-bottom: 4px;">Thẻ Đồng hồ động (Terminal HUD Clock):</h4>
+          <div class="code-block">
+![Terminal Clock](https://YOUR_APP_URL/clock?theme=dark&tz=Asia/Ho_Chi_Minh)
+          </div>
+
           <h4 style="color:#c9d1d9; margin-bottom: 4px;">Thẻ Spotify Presence:</h4>
           <div class="code-block">
-[![Spotify Presence](https://YOUR_APP_URL/api/spotify)](https://YOUR_APP_URL/api/spotify?redirect=true)
+[![Spotify Presence](https://YOUR_APP_URL/spotify)](https://YOUR_APP_URL/spotify?redirect=true)
           </div>
 
           <h4 style="color:#c9d1d9; margin-bottom: 4px;">Thẻ Top Tracks:</h4>
           <div class="code-block">
-![Top Tracks](https://YOUR_APP_URL/api/top-tracks?range=short_term&count=5)
+![Top Tracks](https://YOUR_APP_URL/top-tracks?range=short_term)
           </div>
         </div>
       </body>
@@ -182,8 +218,9 @@ const server = http.createServer(async (req, res) => {
 });
 
 server.listen(PORT, () => {
-  console.log(`🚀 Spotify Presence Server đang chạy tại: http://localhost:${PORT}`);
+  console.log(`🚀 Spotify & Clock Server đang chạy tại: http://localhost:${PORT}`);
   console.log(`👉 Xem trước Widgets: http://localhost:${PORT}`);
-  console.log(`👉 API Presence: http://localhost:${PORT}/api/spotify`);
-  console.log(`👉 API Top Tracks: http://localhost:${PORT}/api/top-tracks`);
+  console.log(`👉 API Clock: http://localhost:${PORT}/clock`);
+  console.log(`👉 API Presence: http://localhost:${PORT}/spotify`);
+  console.log(`👉 API Top Tracks: http://localhost:${PORT}/top-tracks`);
 });
