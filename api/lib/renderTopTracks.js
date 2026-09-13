@@ -1,5 +1,6 @@
 // api/lib/renderTopTracks.js
-import { escapeXml, truncate, getThemeColors, getSpotifyLogoSvg } from './utils.js';
+import { escapeXml, truncate, getThemeColors } from './utils.js';
+import { renderCardCanvas, renderErrorCard } from './cardCanvas.js';
 
 const RANGE_LABELS = {
   short_term: 'LAST 4 WEEKS',
@@ -37,8 +38,6 @@ function generateScrollKeyframes(trackCount, rowHeight) {
  * Renders user's top tracks as an SVG card with smooth vertical auto-scrolling
  */
 export function renderTopTracks(data, options = {}) {
-  const colors = getThemeColors(options.theme);
-
   const {
     status = 'success',
     timeRange = 'short_term',
@@ -46,34 +45,26 @@ export function renderTopTracks(data, options = {}) {
     error = null,
   } = data || {};
 
+  const contentTracks = status === 'success' ? tracks : [];
+
+  // Delegate error states and empty results to the standard error card seam
+  if (status !== 'success' || contentTracks.length === 0) {
+    const errorMsg =
+      error || (status === 'unconfigured' ? 'Run `yarn auth` to configure Spotify' : 'No top tracks found');
+    return renderErrorCard({
+      title: 'Top Spotify Tracks',
+      message: errorMsg,
+      theme: options.theme,
+      height: 140,
+    });
+  }
+
+  const colors = getThemeColors(options.theme);
   const rangeBadgeText = RANGE_LABELS[timeRange] || 'TOP TRACKS';
   const rowHeight = 48;
   const headerHeight = 52;
   const bottomPadding = 8;
   const visibleCount = 4; // Show top 4 at a time
-
-  const contentTracks = status === 'success' ? tracks : [];
-
-  // If unconfigured or error
-  if (status !== 'success' || contentTracks.length === 0) {
-    const errorMsg =
-      error || (status === 'unconfigured' ? 'Run `yarn auth` to configure Spotify' : 'No top tracks found');
-    return `<svg width="420" height="140" viewBox="0 0 420 140" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="card-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="${colors.bgStart}" />
-          <stop offset="100%" stop-color="${colors.bgEnd}" />
-        </linearGradient>
-      </defs>
-      <style>
-        .title { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 14px; font-weight: 700; fill: ${colors.title}; }
-        .msg { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; fill: ${colors.artist}; }
-      </style>
-      <rect width="420" height="140" rx="12" fill="url(#card-grad)" stroke="${colors.border}" stroke-width="1" />
-      <text x="24" y="44" class="title">Top Spotify Tracks</text>
-      <text x="24" y="80" class="msg">${escapeXml(errorMsg)}</text>
-    </svg>`;
-  }
 
   // Determine if auto-scroll is needed
   const shouldScroll = contentTracks.length > visibleCount;
@@ -148,8 +139,17 @@ ${generateScrollKeyframes(contentTracks.length, rowHeight)}
     .track-scroller {
       animation: autoScrollTracks ${animDuration}s cubic-bezier(0.65, 0, 0.35, 1) infinite;
     }
-    .track-scroller:hover {
+    svg:hover .track-scroller {
       animation-play-state: paused;
+    }
+    .badge-paused {
+      display: none;
+    }
+    svg:hover .badge-auto {
+      display: none;
+    }
+    svg:hover .badge-paused {
+      display: inline;
     }
   `
     : '';
@@ -158,32 +158,16 @@ ${generateScrollKeyframes(contentTracks.length, rowHeight)}
     ? `TOP ${contentTracks.length} TRACKS`
     : 'TOP TRACKS';
 
-  return `<svg width="420" height="${cardHeight}" viewBox="0 0 420 ${cardHeight}" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <linearGradient id="card-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="${colors.bgStart}" />
-      <stop offset="100%" stop-color="${colors.bgEnd}" />
-    </linearGradient>
-
+  const defs = `
     <!-- Viewport clip path to constrain visible tracks to 4 rows -->
     <clipPath id="viewport-clip">
       <rect x="0" y="${headerHeight}" width="420" height="${viewportHeight}" />
     </clipPath>
-
     ${clipDefs}
-  </defs>
+  `;
 
-  <style>
-    .header-title {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      fill: ${colors.brand};
-    }
+  const extraStyles = `
     .badge-text {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
       font-size: 9px;
       font-weight: 600;
       letter-spacing: 0.8px;
@@ -191,57 +175,67 @@ ${generateScrollKeyframes(contentTracks.length, rowHeight)}
       fill: ${colors.badgeText};
     }
     .rank-num {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
       font-size: 13px;
       font-weight: 700;
     }
     .track-title {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
       font-size: 13px;
       font-weight: 600;
     }
     .track-artist {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
       font-size: 11px;
       font-weight: 400;
     }
-    ${scrollKeyframes}
-  </style>
-
-  <!-- Background -->
-  <rect width="420" height="${cardHeight}" rx="12" fill="url(#card-grad)" stroke="${colors.border}" stroke-width="1" />
-
-  <!-- Viewport for Track List (Shows 4 at a time with smooth infinite auto-scroll) -->
-  <g clip-path="url(#viewport-clip)">
-    <g class="${shouldScroll ? 'track-scroller' : ''}">
-      ${trackRows}
-    </g>
-  </g>
-
-  <!-- Header Background Shield to ensure clean top boundary -->
-  <path d="M1 12C1 5.92487 5.92487 1 12 1H408C414.075 1 419 5.92487 419 12V${headerHeight}H1V12Z" fill="${colors.headerBg}" />
-  <line x1="1" y1="${headerHeight}" x2="419" y2="${headerHeight}" stroke="${colors.divider}" stroke-width="1" />
-
-  <!-- Header Content -->
-  <g class="header">
-    <text x="24" y="32" class="header-title">${headerTitleText}</text>
-    
-    <!-- Time range pill badge -->
-    <rect x="132" y="20" width="105" height="18" rx="9" fill="${colors.badgeBg}" />
-    <text x="184" y="32" class="badge-text" text-anchor="middle">${rangeBadgeText}</text>
-
-    ${
-      shouldScroll
-        ? `
-    <!-- Auto-scroll indicator badge -->
-    <rect x="244" y="20" width="68" height="18" rx="9" fill="${colors.badgeBg}" />
-    <text x="278" y="32" class="badge-text" text-anchor="middle">↕ AUTO</text>
-    `
-        : ''
+    .track-row {
+      cursor: pointer;
     }
+    .track-row:hover .track-title {
+      fill: ${colors.brand};
+      transition: fill 0.2s ease;
+    }
+    ${scrollKeyframes}
+  `;
 
-    <!-- Spotify Logo (Top Right) -->
-    ${getSpotifyLogoSvg(380, 20, 0.75, colors.brand)}
-  </g>
-</svg>`;
+  const content = `
+    <!-- Viewport for Track List (Shows 4 at a time with smooth infinite auto-scroll) -->
+    <g clip-path="url(#viewport-clip)">
+      <g class="${shouldScroll ? 'track-scroller' : ''}">
+        ${trackRows}
+      </g>
+    </g>
+
+    <!-- Header Background Shield to ensure clean top boundary -->
+    <path d="M1 12C1 5.92487 5.92487 1 12 1H408C414.075 1 419 5.92487 419 12V${headerHeight}H1V12Z" fill="${colors.headerBg}" />
+    <line x1="1" y1="${headerHeight}" x2="419" y2="${headerHeight}" stroke="${colors.divider}" stroke-width="1" />
+
+    <!-- Header Content -->
+    <g class="header">
+      <text x="24" y="32" class="header-title">${headerTitleText}</text>
+      
+      <!-- Time range pill badge -->
+      <rect x="132" y="20" width="105" height="18" rx="9" fill="${colors.badgeBg}" />
+      <text x="184" y="32" class="badge-text" text-anchor="middle">${rangeBadgeText}</text>
+
+      ${
+        shouldScroll
+          ? `
+      <!-- Auto-scroll indicator badge with paused toggle on hover -->
+      <rect x="244" y="20" width="68" height="18" rx="9" fill="${colors.badgeBg}" />
+      <text x="278" y="32" class="badge-text badge-auto" text-anchor="middle">↕ AUTO</text>
+      <text x="278" y="32" class="badge-text badge-paused" text-anchor="middle" fill="#E3B341">⏸ PAUSED</text>
+      `
+          : ''
+      }
+    </g>
+  `;
+
+  return renderCardCanvas({
+    width: 420,
+    height: cardHeight,
+    theme: options.theme,
+    defs,
+    extraStyles,
+    content,
+    logoCoords: { x: 380, y: 20, scale: 0.75 },
+  });
 }

@@ -1,12 +1,11 @@
 // api/lib/renderCard.js
-import { escapeXml, truncate, formatTime, getThemeColors, getSpotifyLogoSvg } from './utils.js';
+import { escapeXml, truncate, formatTime, getThemeColors } from './utils.js';
+import { renderCardCanvas, renderErrorCard } from './cardCanvas.js';
 
 /**
  * Renders the Spotify Presence card as an SVG string
  */
 export function renderCard(presence, options = {}) {
-  const colors = getThemeColors(options.theme);
-
   const {
     status = 'idle',
     isPlaying = false,
@@ -19,6 +18,17 @@ export function renderCard(presence, options = {}) {
     playedAt = null,
   } = presence || {};
 
+  // Delegate error states to the standard error card seam
+  if (status === 'error') {
+    return renderErrorCard({
+      title: title || 'Spotify Presence',
+      message: artist || 'Failed to fetch status',
+      theme: options.theme,
+      height: 120,
+    });
+  }
+
+  const colors = getThemeColors(options.theme);
   const safeTitle = escapeXml(truncate(title, 26));
   const safeArtist = escapeXml(truncate(artist, 34));
 
@@ -80,7 +90,8 @@ export function renderCard(presence, options = {}) {
       <text x="330" y="92" class="time-text" fill="${colors.time}">${progressTimeStr}</text>
     `;
   } else if (isRecentlyPlayed) {
-    const timeLabel = playedAt && playedAt !== 'recently' ? `Played ${playedAt}` : 'Last played song';
+    const rawLabel = playedAt && playedAt !== 'recently' ? `Played ${playedAt}` : 'Last played song';
+    const timeLabel = escapeXml(rawLabel);
     bottomContent = `
       <text x="115" y="92" class="time-text" fill="${colors.time}">${timeLabel}</text>
     `;
@@ -94,44 +105,17 @@ export function renderCard(presence, options = {}) {
     `;
   }
 
-  return `<svg width="420" height="120" viewBox="0 0 420 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <defs>
+  const defs = `
     <clipPath id="album-clip">
       <rect x="22" y="22" width="76" height="76" rx="8" />
     </clipPath>
-    <linearGradient id="card-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="${colors.bgStart}" />
-      <stop offset="100%" stop-color="${colors.bgEnd}" />
-    </linearGradient>
     <linearGradient id="progress-grad" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" stop-color="#1DB954" />
       <stop offset="100%" stop-color="#1ED760" />
     </linearGradient>
-  </defs>
+  `;
 
-  <style>
-    .header-status {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-    }
-    .song-title {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-      font-size: 15px;
-      font-weight: 700;
-    }
-    .artist-name {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-      font-size: 13px;
-      font-weight: 400;
-    }
-    .time-text {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-      font-size: 10px;
-      font-weight: 500;
-    }
+  const extraStyles = `
     @keyframes eq1 { 0%, 100% { height: 4px; y: 28px; } 50% { height: 13px; y: 19px; } }
     @keyframes eq2 { 0%, 100% { height: 13px; y: 19px; } 50% { height: 5px; y: 27px; } }
     @keyframes eq3 { 0%, 100% { height: 7px; y: 25px; } 50% { height: 14px; y: 18px; } }
@@ -140,28 +124,33 @@ export function renderCard(presence, options = {}) {
     .bar-2 { animation: eq2 0.8s ease-in-out infinite; }
     .bar-3 { animation: eq3 1.1s ease-in-out infinite; }
     .bar-4 { animation: eq4 0.9s ease-in-out infinite; }
-  </style>
+  `;
 
-  <!-- Card Background -->
-  <rect width="420" height="120" rx="12" fill="url(#card-grad)" stroke="${colors.border}" stroke-width="1" />
+  const content = `
+    <!-- Album Artwork -->
+    ${coverArtContent}
+    <rect x="22" y="22" width="76" height="76" rx="8" fill="none" stroke="${colors.border}" stroke-width="1" />
 
-  <!-- Album Artwork -->
-  ${coverArtContent}
-  <rect x="22" y="22" width="76" height="76" rx="8" fill="none" stroke="${colors.border}" stroke-width="1" />
+    <!-- Status Header -->
+    ${statusHeader}
 
-  <!-- Status Header -->
-  ${statusHeader}
+    <!-- Track Title -->
+    <text x="115" y="53" class="song-title" fill="${colors.title}">${safeTitle}</text>
 
-  <!-- Spotify Logo (Top Right) -->
-  ${getSpotifyLogoSvg(382, 18, 0.8, colors.brand)}
+    <!-- Artist Name -->
+    <text x="115" y="72" class="artist-name" fill="${colors.artist}">${safeArtist}</text>
 
-  <!-- Track Title -->
-  <text x="115" y="53" class="song-title" fill="${colors.title}">${safeTitle}</text>
+    <!-- Progress Bar or Footer Text -->
+    ${bottomContent}
+  `;
 
-  <!-- Artist Name -->
-  <text x="115" y="72" class="artist-name" fill="${colors.artist}">${safeArtist}</text>
-
-  <!-- Progress Bar or Footer Text -->
-  ${bottomContent}
-</svg>`;
+  return renderCardCanvas({
+    width: 420,
+    height: 120,
+    theme: options.theme,
+    defs,
+    extraStyles,
+    content,
+    logoCoords: { x: 382, y: 18, scale: 0.8 },
+  });
 }
