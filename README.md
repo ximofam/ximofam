@@ -11,7 +11,7 @@
     <th width="30%" align="center">⏰ Current Time</th>
     <th width="70%" align="left">
       <!-- DAILY_QUOTE_HEADER:START -->
-      💬 Quote of the Day &nbsp; <sub>💬 Status: <em>:disappointed: Đếm ngày thất nghiệp</em> • 🤖 Provider: <code>gemini-3.6-flash</code> • 🕒 Updated: <code>2026-09-17 02:48:24 (GMT+7)</code></sub>
+      💬 Quote of the Day &nbsp; <sub>💬 Status: <em>:disappointed: Đếm ngày thất nghiệp</em> • 🤖 Provider: <code>offline-fallback</code> • 🕒 Updated: <code>2026-09-18 02:56:22 (GMT+7)</code></sub>
       <!-- DAILY_QUOTE_HEADER:END -->
     </th>
   </tr>
@@ -24,10 +24,10 @@
     <td width="70%" align="left" valign="middle">
       <!-- DAILY_QUOTE:START -->
       <p align="left">
-        <em>“Khoảng lặng giữa hai công việc không phải là sự bế tắc, mà là cơ hội để bạn xóc lại tinh thần và chuẩn bị cho một bước nhảy vọt mới. Tấm vé tốt nhất luôn đến sau những phút giây kiên nhẫn nhất.”</em>
+        <em>“Cuộc sống là những gì diễn ra khi ta đang bận rộn với các kế hoạch khác.”</em>
       </p>
       <p align="right">
-        — <strong>AI Inspiration</strong>
+        — <strong>John Lennon</strong>
       </p>
       <!-- DAILY_QUOTE:END -->
     </td>
