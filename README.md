@@ -11,7 +11,7 @@
     <th width="30%" align="center">⏰ Current Time</th>
     <th width="70%" align="left">
       <!-- DAILY_QUOTE_HEADER:START -->
-      💬 Quote of the Day &nbsp; <sub>💬 Status: <em>:disappointed: Đếm ngày thất nghiệp</em> • 🤖 Provider: <code>offline-fallback</code> • 🕒 Updated: <code>2026-09-22 03:42:28 (GMT+7)</code></sub>
+      💬 Quote of the Day &nbsp; <sub>💬 Status: <em>:disappointed: Đếm ngày thất nghiệp</em> • 🤖 Provider: <code>offline-fallback</code> • 🕒 Updated: <code>2026-09-23 02:57:45 (GMT+7)</code></sub>
       <!-- DAILY_QUOTE_HEADER:END -->
     </th>
   </tr>
@@ -24,10 +24,10 @@
     <td width="70%" align="left" valign="middle">
       <!-- DAILY_QUOTE:START -->
       <p align="left">
-        <em>“Hãy làm những gì bạn có thể, với những gì bạn có, ở bất cứ nơi đâu bạn đứng.”</em>
+        <em>“Cách duy nhất để làm nên sự nghiệp vĩ đại là yêu việc mình làm.”</em>
       </p>
       <p align="right">
-        — <strong>Theodore Roosevelt</strong>
+        — <strong>Steve Jobs</strong>
       </p>
       <!-- DAILY_QUOTE:END -->
     </td>
