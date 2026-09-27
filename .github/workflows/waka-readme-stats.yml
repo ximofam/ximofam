@@ -37,13 +37,14 @@ jobs:
           SYMBOL_VERSION: "1"
 
 
-          SHOW_PROJECTS: "False"             # Ẩn danh sách dự án / repository
-          SHOW_LINES_OF_CODE: "False"        # Ẩn dòng thống kê Lines of Code
-          SHOW_PROFILE_VIEWS: "False"        # Ẩn số lượt xem Profile
-          SHOW_SHORT_INFO: "False"           # Ẩn thông tin tổng quan account/storage
-          SHOW_LANGUAGE_PER_REPO: "False"    # Ẩn chi tiết ngôn ngữ từng repo
-          SHOW_LOC_CHART: "False"            # Ẩn biểu đồ LOC
+          SHOW_PROJECTS: "False"             
+          SHOW_LINES_OF_CODE: "False"        
+          SHOW_PROFILE_VIEWS: "False"        
+          SHOW_SHORT_INFO: "False"           
+          SHOW_LANGUAGE_PER_REPO: "False"    
+          SHOW_LOC_CHART: "False"            
           SHOW_COMMIT: "False"
           SHOW_DAYS_OF_WEEK: "False"
           SHOW_AI_CODING: "False"
           SHOW_AI_CODE_TIME: "False"
+          SHOW_EDITORS: "False"
