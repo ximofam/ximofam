@@ -72,16 +72,12 @@ Other                    17 mins             ███░░░░░░░░�
 Lua                      10 mins             ██░░░░░░░░░░░░░░░░░░░░░░░   08.29 % 
 Bash                     2 mins              █░░░░░░░░░░░░░░░░░░░░░░░░   02.10 % 
 
-🔥 Editors: 
-Antigravity CLI          1 hr 42 mins        ████████████████████░░░░░   78.68 % 
-Neovim                   27 mins             █████░░░░░░░░░░░░░░░░░░░░   21.32 % 
-
 💻 Operating System: 
 Linux                    2 hrs 10 mins       █████████████████████████   100.00 % 
 ```
 
 
- Last Updated on 27/09/2026 19:59:34 UTC
+ Last Updated on 27/09/2026 20:36:02 UTC
 <!--END_SECTION:waka-->
 
 ---
