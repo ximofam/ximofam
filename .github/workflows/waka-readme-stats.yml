@@ -20,10 +20,30 @@ jobs:
       - uses: anmol098/waka-readme-stats@master
         with:
           WAKATIME_API_KEY: ${{ secrets.WAKATIME_API_KEY }}
-          # GITHUB_TOKEN không gọi được GET /user (403) nên phải dùng PAT
           GH_TOKEN: ${{ secrets.GH_PAT }}
           PUSH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SHOW_DAYS_OF_WEEK: "true"
-          SHOW_LANGUAGE_PER_REPO: "false"
-          SHOW_SHORT_INFO: "true"
-          SHOW_LOC_CHART: "false"
+
+          # Hiển thị Timezone
+          SHOW_TIMEZONE: "True"
+          USER_TIMEZONE: "Asia/Ho_Chi_Minh"
+
+          # Thống kê thời gian lập trình từ WakaTime (Languages, Editors, OS)
+          SHOW_LANGUAGE: "True"
+          SHOW_EDITORS: "True"
+          SHOW_OS: "True"
+          SHOW_TIME_ELAPSED: "True"
+
+          # Bộ ký tự progress bar (█ và ░) chuẩn theo mẫu của bạn
+          SYMBOL_VERSION: "1"
+
+
+          SHOW_PROJECTS: "False"             # Ẩn danh sách dự án / repository
+          SHOW_LINES_OF_CODE: "False"        # Ẩn dòng thống kê Lines of Code
+          SHOW_PROFILE_VIEWS: "False"        # Ẩn số lượt xem Profile
+          SHOW_SHORT_INFO: "False"           # Ẩn thông tin tổng quan account/storage
+          SHOW_LANGUAGE_PER_REPO: "False"    # Ẩn chi tiết ngôn ngữ từng repo
+          SHOW_LOC_CHART: "False"            # Ẩn biểu đồ LOC
+          SHOW_COMMIT: "False"
+          SHOW_DAYS_OF_WEEK: "False"
+          SHOW_AI_CODING: "False"
+          SHOW_AI_CODE_TIME: "False"
