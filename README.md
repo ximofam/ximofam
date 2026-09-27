@@ -60,43 +60,6 @@
 <!--START_SECTION:waka-->
 ![Code Time](http://img.shields.io/badge/Code%20Time-1%20hr%2052%20mins-blue?style=flat)
 
-![AI Code Time](http://img.shields.io/badge/AI%20Code%20Time-2%20hrs%2010%20mins-blue?style=flat)
-
-![Profile Views](http://img.shields.io/badge/Profile%20Views-150-blue?style=flat)
-
-**🐱 My GitHub Data** 
-
-> 📦 12.0 kB Used in GitHub's Storage 
- > 
-> 🏆 641 Contributions in the Year 2026
- > 
-> 🚫 Not Opted to Hire
- > 
-> 📜 14 Public Repositories 
- > 
-> 🔑 3 Private Repositories 
- > 
-**I'm a Night 🦉** 
-
-```text
-🌞 Morning                88 commits          █░░░░░░░░░░░░░░░░░░░░░░░░   05.63 % 
-🌆 Daytime                350 commits         ██████░░░░░░░░░░░░░░░░░░░   22.38 % 
-🌃 Evening                690 commits         ███████████░░░░░░░░░░░░░░   44.12 % 
-🌙 Night                  436 commits         ███████░░░░░░░░░░░░░░░░░░   27.88 % 
-```
-📅 **I'm Most Productive on Tuesday** 
-
-```text
-Monday                   260 commits         ████░░░░░░░░░░░░░░░░░░░░░   16.62 % 
-Tuesday                  280 commits         ████░░░░░░░░░░░░░░░░░░░░░   17.90 % 
-Wednesday                271 commits         ████░░░░░░░░░░░░░░░░░░░░░   17.33 % 
-Thursday                 253 commits         ████░░░░░░░░░░░░░░░░░░░░░   16.18 % 
-Friday                   146 commits         ██░░░░░░░░░░░░░░░░░░░░░░░   09.34 % 
-Saturday                 145 commits         ██░░░░░░░░░░░░░░░░░░░░░░░   09.27 % 
-Sunday                   209 commits         ███░░░░░░░░░░░░░░░░░░░░░░   13.36 % 
-```
-
-
 📊 **This Week I Spent My Time On** 
 
 ```text
@@ -113,44 +76,12 @@ Bash                     2 mins              █░░░░░░░░░░�
 Antigravity CLI          1 hr 42 mins        ████████████████████░░░░░   78.68 % 
 Neovim                   27 mins             █████░░░░░░░░░░░░░░░░░░░░   21.32 % 
 
-🐱‍💻 Projects: 
-my-react-app             1 hr 7 mins         █████████████░░░░░░░░░░░░   51.52 % 
-ximofam                  43 mins             ████████░░░░░░░░░░░░░░░░░   33.76 % 
-LearnNeovim              10 mins             ██░░░░░░░░░░░░░░░░░░░░░░░   08.29 % 
-wakatime.lua             5 mins              █░░░░░░░░░░░░░░░░░░░░░░░░   03.91 % 
-Unknown Project          2 mins              █░░░░░░░░░░░░░░░░░░░░░░░░   02.10 % 
-
 💻 Operating System: 
 Linux                    2 hrs 10 mins       █████████████████████████   100.00 % 
 ```
 
-🤖 **AI Coding This Week** 
 
-```text
-⏱ AI Coding Time: 2 hrs 10 mins (100.0%)
-
-✍️ 42 lines written by AI, 0 lines written by hand (100.0% AI-written)
-
-🔤 4,090,206 Input Tokens, 60,383 Output Tokens
-
-💵 $5.08 Estimated AI Cost This Week
-
-🧠 10 AI Sessions, 34 AI Prompts
-
-Gemini                   42 lines            █████████████████████████   100.00 % 
-Opencode-Cli             0 lines             ░░░░░░░░░░░░░░░░░░░░░░░░░   00.00 % 
-Deepseek                 0 lines             ░░░░░░░░░░░░░░░░░░░░░░░░░   00.00 % 
-M                        0 lines             ░░░░░░░░░░░░░░░░░░░░░░░░░   00.00 % 
-
-🔎 AI Coding Insights:
-🤖 AI-Driven — 100.0% of written lines came from AI
-📝 Concise Prompter — average 126 characters per prompt
-🔁 Iterative Prompter — average 3 prompts per session
-🚀 High AI Trust — 0.0% of changed lines were hand-edited
-```
-
-
- Last Updated on 27/09/2026 19:33:32 UTC
+ Last Updated on 27/09/2026 19:59:34 UTC
 <!--END_SECTION:waka-->
 
 ---
