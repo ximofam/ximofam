@@ -29,7 +29,6 @@ jobs:
 
           # Thống kê thời gian lập trình từ WakaTime (Languages, Editors, OS)
           SHOW_LANGUAGE: "True"
-          SHOW_EDITORS: "True"
           SHOW_OS: "True"
           SHOW_TIME_ELAPSED: "True"
 
@@ -37,12 +36,12 @@ jobs:
           SYMBOL_VERSION: "1"
 
 
-          SHOW_PROJECTS: "False"             
-          SHOW_LINES_OF_CODE: "False"        
-          SHOW_PROFILE_VIEWS: "False"        
-          SHOW_SHORT_INFO: "False"           
-          SHOW_LANGUAGE_PER_REPO: "False"    
-          SHOW_LOC_CHART: "False"            
+          SHOW_PROJECTS: "False"
+          SHOW_LINES_OF_CODE: "False"
+          SHOW_PROFILE_VIEWS: "False"
+          SHOW_SHORT_INFO: "False"
+          SHOW_LANGUAGE_PER_REPO: "False"
+          SHOW_LOC_CHART: "False"
           SHOW_COMMIT: "False"
           SHOW_DAYS_OF_WEEK: "False"
           SHOW_AI_CODING: "False"
