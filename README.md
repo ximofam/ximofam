@@ -11,7 +11,7 @@
     <th width="30%" align="center">⏰ Current Time</th>
     <th width="70%" align="left">
       <!-- DAILY_QUOTE_HEADER:START -->
-      💬 Quote of the Day &nbsp; <sub>💬 Status: <em>:disappointed: Đếm ngày thất nghiệp</em> • 🤖 Provider: <code>offline-fallback</code> • 🕒 Updated: <code>2026-09-29 05:21:10 (GMT+7)</code></sub>
+      💬 Quote of the Day &nbsp; <sub>💬 Status: <em>:disappointed: Đếm ngày thất nghiệp</em> • 🤖 Provider: <code>gemini-3.6-flash</code> • 🕒 Updated: <code>2026-09-30 04:10:14 (GMT+7)</code></sub>
       <!-- DAILY_QUOTE_HEADER:END -->
     </th>
   </tr>
@@ -24,10 +24,10 @@
     <td width="70%" align="left" valign="middle">
       <!-- DAILY_QUOTE:START -->
       <p align="left">
-        <em>“Cuộc sống là những gì diễn ra khi ta đang bận rộn với các kế hoạch khác.”</em>
+        <em>“Thất nghiệp không định nghĩa giá trị của bạn, đó chỉ là một khoảng nghỉ cần thiết để bạn chuẩn bị cho một hành trình phù hợp hơn.”</em>
       </p>
       <p align="right">
-        — <strong>John Lennon</strong>
+        — <strong>AI Inspiration</strong>
       </p>
       <!-- DAILY_QUOTE:END -->
     </td>
