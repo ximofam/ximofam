@@ -11,7 +11,7 @@
     <th width="30%" align="center">⏰ Current Time</th>
     <th width="70%" align="left">
       <!-- DAILY_QUOTE_HEADER:START -->
-      💬 Quote of the Day &nbsp; <sub>💬 Status: <em>:disappointed: Đếm ngày thất nghiệp</em> • 🤖 Provider: <code>gemini-3.6-flash</code> • 🕒 Updated: <code>2026-09-30 04:10:14 (GMT+7)</code></sub>
+      💬 Quote of the Day &nbsp; <sub>💬 Status: <em>:disappointed: Đếm ngày thất nghiệp</em> • 🤖 Provider: <code>gemini-3.6-flash</code> • 🕒 Updated: <code>2026-10-01 04:06:03 (GMT+7)</code></sub>
       <!-- DAILY_QUOTE_HEADER:END -->
     </th>
   </tr>
@@ -24,7 +24,7 @@
     <td width="70%" align="left" valign="middle">
       <!-- DAILY_QUOTE:START -->
       <p align="left">
-        <em>“Thất nghiệp không định nghĩa giá trị của bạn, đó chỉ là một khoảng nghỉ cần thiết để bạn chuẩn bị cho một hành trình phù hợp hơn.”</em>
+        <em>“Khoảng trống giữa hai công việc không phải là sự thất bại, mà là khoảng nghỉ cần thiết để bạn định hình lại hành trình tiếp theo.”</em>
       </p>
       <p align="right">
         — <strong>AI Inspiration</strong>
