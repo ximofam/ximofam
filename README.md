@@ -11,7 +11,7 @@
     <th width="30%" align="center">⏰ Current Time</th>
     <th width="70%" align="left">
       <!-- DAILY_QUOTE_HEADER:START -->
-      💬 Quote of the Day &nbsp; <sub>💬 Status: <em>:disappointed: Đếm ngày thất nghiệp</em> • 🤖 Provider: <code>gemini-3.6-flash</code> • 🕒 Updated: <code>2026-10-04 02:36:13 (GMT+7)</code></sub>
+      💬 Quote of the Day &nbsp; <sub>💬 Status: <em>:disappointed: Đếm ngày thất nghiệp</em> • 🤖 Provider: <code>offline-fallback</code> • 🕒 Updated: <code>2026-10-05 02:50:55 (GMT+7)</code></sub>
       <!-- DAILY_QUOTE_HEADER:END -->
     </th>
   </tr>
@@ -24,10 +24,10 @@
     <td width="70%" align="left" valign="middle">
       <!-- DAILY_QUOTE:START -->
       <p align="left">
-        <em>“Thất nghiệp không định nghĩa giá trị của bạn, đó chỉ là khoảng lặng giữa hai bản nhạc hay. Hãy dùng thời gian này để chuẩn bị cho nốt nhạc rực rỡ tiếp theo.”</em>
+        <em>“Hãy làm những gì bạn có thể, với những gì bạn có, ở bất cứ nơi đâu bạn đứng.”</em>
       </p>
       <p align="right">
-        — <strong>AI Inspiration</strong>
+        — <strong>Theodore Roosevelt</strong>
       </p>
       <!-- DAILY_QUOTE:END -->
     </td>
