@@ -11,7 +11,7 @@
     <th width="30%" align="center">⏰ Current Time</th>
     <th width="70%" align="left">
       <!-- DAILY_QUOTE_HEADER:START -->
-      💬 Quote of the Day &nbsp; <sub>💬 Status: <em>:disappointed: Đếm ngày thất nghiệp</em> • 🤖 Provider: <code>gemini-3.6-flash</code> • 🕒 Updated: <code>2026-10-10 04:24:07 (GMT+7)</code></sub>
+      💬 Quote of the Day &nbsp; <sub>💬 Status: <em>:disappointed: Đếm ngày thất nghiệp</em> • 🤖 Provider: <code>gemini-3.6-flash</code> • 🕒 Updated: <code>2026-10-11 03:22:36 (GMT+7)</code></sub>
       <!-- DAILY_QUOTE_HEADER:END -->
     </th>
   </tr>
@@ -24,7 +24,7 @@
     <td width="70%" align="left" valign="middle">
       <!-- DAILY_QUOTE:START -->
       <p align="left">
-        <em>“Thất nghiệp không phải là chấm hết, mà chỉ là một dấu phẩy giúp bạn nghỉ tay, chuẩn bị viết nên một chương mới rực rỡ hơn trong sự nghiệp.”</em>
+        <em>“Thất nghiệp không phải là kết thúc, mà là khoảng nghỉ cần thiết để bạn tái tạo năng lượng và tìm lại đúng hướng đi cho riêng mình.”</em>
       </p>
       <p align="right">
         — <strong>AI Inspiration</strong>
