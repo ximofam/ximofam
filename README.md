@@ -66,18 +66,18 @@
 🕑︎ Time Zone: Asia/Ho_Chi_Minh
 
 💬 Programming Languages: 
-Lua                      2 hrs 22 mins       ██████████░░░░░░░░░░░░░░░   39.95 % 
-Markdown                 1 hr 32 mins        ██████░░░░░░░░░░░░░░░░░░░   25.98 % 
-Python                   1 hr                ████░░░░░░░░░░░░░░░░░░░░░   16.92 % 
-Other                    38 mins             ███░░░░░░░░░░░░░░░░░░░░░░   10.95 % 
-Text                     13 mins             █░░░░░░░░░░░░░░░░░░░░░░░░   03.84 % 
+Lua                      1 hr 33 mins        ███████████░░░░░░░░░░░░░░   44.58 % 
+Markdown                 1 hr 32 mins        ███████████░░░░░░░░░░░░░░   44.27 % 
+Text                     13 mins             ██░░░░░░░░░░░░░░░░░░░░░░░   06.55 % 
+Other                    5 mins              █░░░░░░░░░░░░░░░░░░░░░░░░   02.74 % 
+Python                   1 min               ░░░░░░░░░░░░░░░░░░░░░░░░░   00.69 % 
 
 💻 Operating System: 
-Linux                    5 hrs 55 mins       █████████████████████████   100.00 % 
+Linux                    3 hrs 28 mins       █████████████████████████   100.00 % 
 ```
 
 
- Last Updated on 11/10/2026 04:16:40 UTC
+ Last Updated on 12/10/2026 04:33:48 UTC
 <!--END_SECTION:waka-->
 
 ---
