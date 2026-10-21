@@ -66,18 +66,18 @@
 🕑︎ Time Zone: Asia/Ho_Chi_Minh
 
 💬 Programming Languages: 
-Text                     52 mins             █████████░░░░░░░░░░░░░░░░   35.15 % 
-Markdown                 39 mins             ███████░░░░░░░░░░░░░░░░░░   26.23 % 
-JSON                     19 mins             ███░░░░░░░░░░░░░░░░░░░░░░   12.70 % 
-Other                    14 mins             ██░░░░░░░░░░░░░░░░░░░░░░░   09.83 % 
-TeX                      11 mins             ██░░░░░░░░░░░░░░░░░░░░░░░   07.70 % 
+Other                    3 hrs 25 mins       ███████████████░░░░░░░░░░   58.78 % 
+Text                     52 mins             ████░░░░░░░░░░░░░░░░░░░░░   15.13 % 
+QML                      29 mins             ██░░░░░░░░░░░░░░░░░░░░░░░   08.45 % 
+JSON                     19 mins             █░░░░░░░░░░░░░░░░░░░░░░░░   05.48 % 
+Markdown                 16 mins             █░░░░░░░░░░░░░░░░░░░░░░░░   04.63 % 
 
 💻 Operating System: 
-Linux                    2 hrs 30 mins       █████████████████████████   100.00 % 
+Linux                    5 hrs 49 mins       █████████████████████████   100.00 % 
 ```
 
 
- Last Updated on 20/10/2026 03:37:12 UTC
+ Last Updated on 21/10/2026 03:29:37 UTC
 <!--END_SECTION:waka-->
 
 ---
