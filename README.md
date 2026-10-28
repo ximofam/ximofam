@@ -11,7 +11,7 @@
     <th width="30%" align="center">⏰ Current Time</th>
     <th width="70%" align="left">
       <!-- DAILY_QUOTE_HEADER:START -->
-      💬 Quote of the Day &nbsp; <sub>💬 Status: <em>:disappointed: Đếm ngày thất nghiệp</em> • 🤖 Provider: <code>gemini-3.6-flash</code> • 🕒 Updated: <code>2026-10-28 04:03:16 (GMT+7)</code></sub>
+      💬 Quote of the Day &nbsp; <sub>💬 Status: <em>:disappointed: Đếm ngày thất nghiệp</em> • 🤖 Provider: <code>gemini-3.6-flash</code> • 🕒 Updated: <code>2026-10-29 04:26:26 (GMT+7)</code></sub>
       <!-- DAILY_QUOTE_HEADER:END -->
     </th>
   </tr>
@@ -24,7 +24,7 @@
     <td width="70%" align="left" valign="middle">
       <!-- DAILY_QUOTE:START -->
       <p align="left">
-        <em>“Đừng đếm những ngày chưa có công việc, hãy đếm những cơ hội bạn có thể tạo ra. Đoạn nghỉ này không phải là khoảng trống thất bại, mà là bước đệm cho một cú nhảy xa hơn.”</em>
+        <em>“Khoảng nghỉ giữa hai công việc không phải là khoảng trống vô nghĩa, mà là thời điểm để bạn sạc lại năng lượng, định hình lại bản thân và sẵn sàng cho một hành trình bứt phá hơn.”</em>
       </p>
       <p align="right">
         — <strong>AI Inspiration</strong>
