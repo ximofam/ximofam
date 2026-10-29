@@ -58,7 +58,7 @@
 ### ⏱️ WakaTime Stats
 
 <!--START_SECTION:waka-->
-![Code Time](http://img.shields.io/badge/Code%20Time-71%20hrs%2011%20mins-blue?style=flat)
+![Code Time](http://img.shields.io/badge/Code%20Time-77%20hrs%206%20mins-blue?style=flat)
 
 📊 **This Week I Spent My Time On** 
 
@@ -66,18 +66,18 @@
 🕑︎ Time Zone: Asia/Ho_Chi_Minh
 
 💬 Programming Languages: 
-Go                       19 hrs              ██████████░░░░░░░░░░░░░░░   39.59 % 
-Markdown                 16 hrs 18 mins      ████████░░░░░░░░░░░░░░░░░   33.94 % 
-YAML                     5 hrs 42 mins       ███░░░░░░░░░░░░░░░░░░░░░░   11.89 % 
-Other                    3 hrs 26 mins       ██░░░░░░░░░░░░░░░░░░░░░░░   07.18 % 
-JSON                     1 hr 5 mins         █░░░░░░░░░░░░░░░░░░░░░░░░   02.29 % 
+Go                       18 hrs 46 mins      ██████████░░░░░░░░░░░░░░░   39.34 % 
+Markdown                 16 hrs 20 mins      █████████░░░░░░░░░░░░░░░░   34.25 % 
+YAML                     6 hrs               ███░░░░░░░░░░░░░░░░░░░░░░   12.60 % 
+Other                    2 hrs 51 mins       █░░░░░░░░░░░░░░░░░░░░░░░░   05.99 % 
+JSON                     1 hr 9 mins         █░░░░░░░░░░░░░░░░░░░░░░░░   02.43 % 
 
 💻 Operating System: 
-Linux                    48 hrs 1 min        █████████████████████████   100.00 % 
+Linux                    47 hrs 42 mins      █████████████████████████   100.00 % 
 ```
 
 
- Last Updated on 28/10/2026 04:14:22 UTC
+ Last Updated on 29/10/2026 04:35:23 UTC
 <!--END_SECTION:waka-->
 
 ---
