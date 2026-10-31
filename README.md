@@ -66,18 +66,18 @@
 🕑︎ Time Zone: Asia/Ho_Chi_Minh
 
 💬 Programming Languages: 
-Go                       17 hrs 16 mins      ██████████░░░░░░░░░░░░░░░   39.34 % 
-Markdown                 15 hrs 9 mins       █████████░░░░░░░░░░░░░░░░   34.53 % 
-YAML                     5 hrs 42 mins       ███░░░░░░░░░░░░░░░░░░░░░░   12.98 % 
-Other                    2 hrs 33 mins       █░░░░░░░░░░░░░░░░░░░░░░░░   05.81 % 
-JSON                     1 hr 9 mins         █░░░░░░░░░░░░░░░░░░░░░░░░   02.64 % 
+Go                       13 hrs 33 mins      ██████████░░░░░░░░░░░░░░░   39.82 % 
+Markdown                 10 hrs 48 mins      ████████░░░░░░░░░░░░░░░░░   31.73 % 
+YAML                     5 hrs 14 mins       ████░░░░░░░░░░░░░░░░░░░░░   15.37 % 
+Other                    1 hr 34 mins        █░░░░░░░░░░░░░░░░░░░░░░░░   04.60 % 
+Python                   1 hr 3 mins         █░░░░░░░░░░░░░░░░░░░░░░░░   03.08 % 
 
 💻 Operating System: 
-Linux                    43 hrs 55 mins      █████████████████████████   100.00 % 
+Linux                    34 hrs 3 mins       █████████████████████████   100.00 % 
 ```
 
 
- Last Updated on 30/10/2026 04:35:20 UTC
+ Last Updated on 31/10/2026 04:18:23 UTC
 <!--END_SECTION:waka-->
 
 ---
