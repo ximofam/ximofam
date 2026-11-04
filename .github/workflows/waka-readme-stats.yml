@@ -19,18 +19,18 @@ jobs:
     steps:
       - uses: anmol098/waka-readme-stats@master
         with:
+          # Lấy personal OAuth token tại https://wakatime.com/oauth và lưu vào
+          # secret WAKATIME_API_KEY (giữ tên input của action, không dùng plugin API key).
           WAKATIME_API_KEY: ${{ secrets.WAKATIME_API_KEY }}
           GH_TOKEN: ${{ secrets.GH_PAT }}
           PUSH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-          # Hiển thị Timezone
+          # Hiển thị timezone được cấu hình trong tài khoản WakaTime.
           SHOW_TIMEZONE: "True"
-          USER_TIMEZONE: "Asia/Ho_Chi_Minh"
 
           # Thống kê thời gian lập trình từ WakaTime (Languages, Editors, OS)
           SHOW_LANGUAGE: "True"
           SHOW_OS: "True"
-          SHOW_TIME_ELAPSED: "True"
 
           # Bộ ký tự progress bar (█ và ░) chuẩn theo mẫu của bạn
           SYMBOL_VERSION: "1"
