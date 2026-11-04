@@ -58,8 +58,26 @@
 ### ⏱️ WakaTime Stats
 
 <!--START_SECTION:waka-->
+![Code Time](http://img.shields.io/badge/Code%20Time-78%20hrs%2011%20mins-blue?style=flat)
 
- Last Updated on 04/11/2026 07:57:18 UTC
+📊 **This Week I Spent My Time On**
+
+```text
+🕑︎ Time Zone: Asia/Ho_Chi_Minh
+
+💬 Programming Languages:
+Go                       12 hrs 22 mins      ███████████░░░░░░░░░░░░░░   43.24 %
+Markdown                 7 hrs 30 mins       ███████░░░░░░░░░░░░░░░░░░   26.27 %
+YAML                     4 hrs 33 mins       ████░░░░░░░░░░░░░░░░░░░░░   15.92 %
+Other                    1 hr 19 mins        █░░░░░░░░░░░░░░░░░░░░░░░░   04.61 %
+Python                   1 hr 3 mins         █░░░░░░░░░░░░░░░░░░░░░░░░   03.69 %
+
+💻 Operating System:
+Linux                    28 hrs 36 mins      █████████████████████████   100.00 %
+```
+
+
+ Last Updated on 01/11/2026 04:38:17 UTC
 <!--END_SECTION:waka-->
 
 ---

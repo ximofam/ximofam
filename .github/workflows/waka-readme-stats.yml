@@ -17,33 +17,20 @@ jobs:
     name: Update Readme with Metrics
     runs-on: ubuntu-latest
     steps:
-      - uses: anmol098/waka-readme-stats@master
-        with:
-          # Lấy personal OAuth token tại https://wakatime.com/oauth và lưu vào
-          # secret WAKATIME_API_KEY (giữ tên input của action, không dùng plugin API key).
+      - uses: actions/checkout@v4
+      - name: Update WakaTime statistics
+        env:
+          # Personal OAuth token from https://wakatime.com/oauth, with read_stats permission.
           WAKATIME_API_KEY: ${{ secrets.WAKATIME_API_KEY }}
-          GH_TOKEN: ${{ secrets.GH_PAT }}
-          PUSH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-          # Hiển thị timezone được cấu hình trong tài khoản WakaTime.
-          SHOW_TIMEZONE: "True"
-
-          # Thống kê thời gian lập trình từ WakaTime (Languages, Editors, OS)
-          SHOW_LANGUAGE: "True"
-          SHOW_OS: "True"
-
-          # Bộ ký tự progress bar (█ và ░) chuẩn theo mẫu của bạn
-          SYMBOL_VERSION: "1"
-
-
-          SHOW_PROJECTS: "False"
-          SHOW_LINES_OF_CODE: "False"
-          SHOW_PROFILE_VIEWS: "False"
-          SHOW_SHORT_INFO: "False"
-          SHOW_LANGUAGE_PER_REPO: "False"
-          SHOW_LOC_CHART: "False"
-          SHOW_COMMIT: "False"
-          SHOW_DAYS_OF_WEEK: "False"
-          SHOW_AI_CODING: "False"
-          SHOW_AI_CODE_TIME: "False"
-          SHOW_EDITORS: "False"
+        run: python3 .github/scripts/update_wakatime.py
+      - name: Commit and push updated statistics
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          if git diff --cached --quiet; then
+            exit 0
+          fi
+          git commit -m "docs(readme): update WakaTime statistics"
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
