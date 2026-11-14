@@ -1,165 +1,141 @@
-# ⚡ GitHub Profile Widgets (Spotify & Terminal Ticking Clock)
+# Widget cho profile GitHub
 
-Bộ sưu tập widget SVG động theo thời gian thực (Zero-Cache) để gắn vào GitHub Profile README:
+Bốn endpoint SVG/JSON phục vụ README profile. App chạy trên Vercel, source nằm trong `widget/` của repo `ximofam/ximofam`; README ở root là nơi đang nhúng các route này.
 
-1. **⏱️ Terminal Ticking Clock:** Đồng hồ phong cách cửa sổ Terminal tối giản (macOS style với 3 chấm màu), **nhảy số đếm Giờ : Phút : Giây thực tế** bằng Pure CSS `@keyframes` cascading reels, hỗ trợ co giãn tỉ lệ `scale`, tùy chỉnh `width`/`height`, mọi múi giờ IANA và đa dạng theme (`matrix`, `cyberpunk`, `dark`, `light`, `transparent`).
-2. **🎵 Spotify Presence:** Thẻ trạng thái bài hát đang nghe theo thời gian thực (kèm hiệu ứng sóng nhạc Equalizer) hoặc bài nghe gần nhất.
-3. **🏆 Spotify Top Tracks:** Thẻ danh sách bài hát bạn nghe nhiều nhất với hiệu ứng cuộn tự động (Infinite Auto-Scroll Carousel) và dừng khi rê chuột (Carousel Inspection).
+Base URL: `https://my-github-widget.vercel.app`
 
----
+## Endpoint
 
-## ⏱️ 1. Widget Đồng hồ Terminal Đếm Giờ Thực (Terminal Ticking Clock)
-
-Đồng hồ chạy trực tiếp trên GitHub README mà không cần JavaScript. Sử dụng kỹ thuật dải cuộn số CSS (Cascading Digit Reels) đồng bộ chính xác:
-- **Giây**: Nhảy số từng giây một (`steps(60)`).
-- **Phút**: Tự động bước sang phút mới ngay khi giây chạm `59 ➔ 00`.
-- **Giờ**: Tự động bước sang giờ mới ngay khi phút chạm `59 ➔ 00`.
-
-### Cú pháp nhúng vào GitHub Profile `README.md`:
-
-```markdown
-![Terminal Clock](https://YOUR_APP_URL/clock?theme=dark&tz=Asia/Ho_Chi_Minh)
-```
-
-Hoặc gắn link mở trang chủ preview khi click:
-
-```markdown
-[![Terminal Clock](https://YOUR_APP_URL/clock?theme=matrix&tz=Asia/Ho_Chi_Minh&scale=1.1)](https://YOUR_APP_URL)
-```
-
-### Các Query Parameters tùy chỉnh:
-
-| Tham số | Giá trị | Mặc định | Ý nghĩa |
-| :--- | :--- | :--- | :--- |
-| `tz` | Múi giờ IANA (vd: `Asia/Ho_Chi_Minh`, `Asia/Tokyo`, `America/New_York`, `Europe/London`, `UTC`) | `Asia/Ho_Chi_Minh` | Múi giờ hiển thị của đồng hồ. Tự động fallback nếu nhập sai. |
-| `scale` | Số thực (vd: `0.8`, `1.0`, `1.2`, `1.5`) | `1.0` | Tự động co giãn toàn bộ kích thước đồng hồ theo tỉ lệ cân đối. |
-| `width` | Số nguyên pixel (vd: `280`, `350`) | `280` | Chiều rộng tùy chỉnh. |
-| `height` | Số nguyên pixel (vd: `85`, `100`) | `85` | Chiều cao tùy chỉnh. |
-| `theme` | `dark`, `light`, `matrix`, `cyberpunk`, `transparent` | `dark` | Bảng màu giao diện: Matrix (xanh hacker neon), Cyberpunk (hồng/cyan), Nền trong suốt,... |
-| `format` | `24`, `12`, `json` | `24` | Định dạng 24 giờ (`14:30:45`), 12 giờ kèm AM/PM (`02:30:45 PM`) hoặc trả về JSON. |
-
-#### Ví dụ đường dẫn:
-- Múi giờ Việt Nam (Dark Theme chuẩn): `https://YOUR_APP_URL/clock`
-- Phóng to 1.2 lần (Hacker Matrix Theme): `https://YOUR_APP_URL/clock?theme=matrix&scale=1.2`
-- Nhỏ gọn 0.8 lần: `https://YOUR_APP_URL/clock?scale=0.8`
-- Cyberpunk Neon Theme (New York): `https://YOUR_APP_URL/clock?theme=cyberpunk&tz=America/New_York`
-- Định dạng 12 giờ (AM/PM): `https://YOUR_APP_URL/clock?format=12`
-- Nền trong suốt (Transparent): `https://YOUR_APP_URL/clock?theme=transparent`
-
-> [!NOTE]
-> **Khả năng đếm giờ thực tế trên GitHub:**
-> Nhờ kỹ thuật CSS animation cascading reels, khi người xem mở trang cá nhân GitHub của bạn, **số giây sẽ nhảy liên tục từng giây một, phút và giờ sẽ tự động nhảy số khi hết chu kỳ**. Server luôn trả về header `no-cache` để mỗi lần tải lại trang hoặc proxy làm mới là đồng hồ lập tức đồng bộ theo mốc giờ mới nhất của server.
-
----
-
-## 🎵 2. Spotify Widgets Setup
-
-### Bước 1: Cấu hình Spotify Developer Dashboard
-1. Truy cập [Spotify Developer Dashboard](https://developer.spotify.com/dashboard) và tạo/chọn app.
-2. Vào mục **Settings** -> **Redirect URIs**, thêm URI:
-   ```
-   http://127.0.0.1:8888/callback
-   ```
-3. Nhấn **Save**.
-
-### Bước 2: Lấy Refresh Token
-```bash
-yarn auth
-# hoặc npm run auth
-```
-Mở đường link in ra trong terminal, đăng nhập và nhấn **Agree**. Script sẽ tự động lấy `SPOTIFY_REFRESH_TOKEN` và lưu vào file `.env`.
-
-### Bước 3: Cú pháp nhúng Spotify vào README:
-
-#### 🎧 Bài hát đang nghe (Presence):
-```markdown
-[![Spotify Presence](https://YOUR_APP_URL/spotify)](https://YOUR_APP_URL/spotify?redirect=true)
-```
-
-#### 📜 Top bài hát yêu thích (Top Tracks):
-```markdown
-![Top Tracks](https://YOUR_APP_URL/top-tracks?range=short_term)
-```
-
----
-
-## 🤖 3. LLM Quote Generator API (`/quote`)
-
-REST API sinh câu danh ngôn lập trình, cuộc sống hoặc động lực theo ngữ cảnh tâm trạng/trạng thái (`status`) của người dùng, hỗ trợ chuyển đổi linh hoạt giữa các nhà cung cấp **Google Gemini**, **Groq**, **Anthropic Claude**, **OpenAI**, **DeepSeek**:
-
-### Endpoint:
-```
-GET /quote
-GET /api/quote
-```
-
-### Tham số Query Parameters:
-| Tham số | Mặc định | Ý nghĩa |
+| Route | Trả về | Dùng cho |
 | :--- | :--- | :--- |
-| `topic` | `coding` | Chủ đề quote: `coding`, `life`, `motivation`, `humor`. |
-| `status` | `null` | Ngữ cảnh hoặc tâm trạng (vd: `fixing bugs`, `deploying to production`, `tired`). |
-| `lang` | `en` | Ngôn ngữ câu quote: `en` (Tiếng Anh) hoặc `vi` (Tiếng Việt). |
-| `tone` | `inspirational` | Giọng điệu: `inspirational`, `philosophical`, `humorous`, `sarcastic`. |
-| `provider` | `auto` | Chỉ định provider: `gemini`, `groq`, `claude`, `openai` (nếu có cấu hình API Key tương ứng). |
+| `/clock` | SVG hoặc JSON | Đồng hồ terminal nhảy giây |
+| `/spotify` | SVG, JSON hoặc redirect 302 | Bài đang nghe / nghe gần nhất |
+| `/top-tracks` | SVG hoặc JSON | Top tracks, auto-scroll |
+| `/quote` | JSON | Quote từ LLM hoặc offline fallback |
 
-### Ví dụ phản hồi JSON:
+### `/clock`
+
+| Tham số | Giá trị | Mặc định |
+| :--- | :--- | :--- |
+| `tz` | Múi giờ IANA | Timezone của request (Vercel) hoặc `Asia/Ho_Chi_Minh` |
+| `theme` | `dark`, `light`, `matrix`, `cyberpunk`, `transparent` | `dark` |
+| `format` | `24`, `12`, `json` | `24` |
+| `scale` | Số thực | `1` |
+| `width` | Pixel | `280` |
+| `height` | Pixel | `85` |
+
+Ví dụ: `.../clock?theme=matrix&tz=Asia/Ho_Chi_Minh&scale=1.2`
+
+`format=json` trả về `timestamp`, `iso`, `hours`, `minutes`, `seconds`, `period`, `dateStr`, `timezone`.
+
+### `/spotify`
+
+| Tham số | Giá trị | Mặc định |
+| :--- | :--- | :--- |
+| `theme` | `dark`, `light` | `dark` |
+| `redirect` | `true` hoặc `1` để 302 sang bài hát | – |
+| `format` | `json` để trả dữ liệu thô | – |
+
+### `/top-tracks`
+
+| Tham số | Giá trị | Mặc định |
+| :--- | :--- | :--- |
+| `range` | `short_term` (4 tuần), `medium_term` (6 tháng), `long_term` (all time) | `short_term` |
+| `limit` | 1–20, số track lấy từ Spotify | `10` |
+| `count` (hoặc `visible`) | 1–10, số track hiển thị | `4` |
+| `theme` | `dark`, `light` | `dark` |
+| `format` | `json` để trả dữ liệu thô | – |
+
+Ví dụ: `.../top-tracks?range=long_term&count=4`
+
+### `/quote`
+
+| Tham số | Giá trị | Mặc định |
+| :--- | :--- | :--- |
+| `topic` | `coding`, `life`, `motivation`, `humor`, `auto` | `coding` (hoặc `auto` khi có `status`) |
+| `status` | Văn bản tự do | – |
+| `lang` | `en`, `vi` | `en`; tự nhận `vi` nếu `status` có dấu tiếng Việt |
+| `tone` | `inspirational`, `philosophical`, `humorous`, `sarcastic`, `auto` | `inspirational` (hoặc `auto` khi có `status`) |
+| `provider` | `gemini`, `groq`, `claude`, `openai` | Tự chọn theo API key đang có |
+
+Ví dụ phản hồi:
+
 ```json
 {
-  "quote": "Code is like humor. When you have to explain it, it’s bad.",
-  "author": "Cory House",
-  "topic": "coding",
-  "status": "fixing bugs",
+  "quote": "Cuộc sống là những gì diễn ra khi ta đang bận rộn với các kế hoạch khác.",
+  "author": "John Lennon",
+  "topic": "life",
+  "status": "tired",
   "model": "gemini-3.6-flash",
-  "language": "en",
-  "timestamp": 1726215600000
+  "language": "vi",
+  "timestamp": 1763000000000
 }
 ```
 
-> [!TIP]
-> **Hỗ trợ đa nhà cung cấp (Multi-Provider):**
-> - **Google Gemini**: Thêm `GEMINI_API_KEY` (khuyên dùng, miễn phí từ Google AI Studio, model mặc định: `gemini-3.6-flash`).
-> - **Groq**: Thêm `GROQ_API_KEY` (tốc độ ~500ms, model mặc định: `llama-3.3-70b-versatile`).
-> - **Anthropic Claude**: Thêm `ANTHROPIC_API_KEY` (model mặc định: `claude-3-5-haiku-20241022`).
-> - **OpenAI**: Thêm `OPENAI_API_KEY` (model mặc định: `gpt-4o-mini`).
-> - **Offline Fallback:** Nếu chưa cấu hình bất kỳ API Key nào, API tự động trả về câu quote phong phú từ kho offline với `"model": "offline-fallback"`.
+Không có API key nào → `"model": "offline-fallback"`.
 
----
-
-## 💻 4. Chạy thử nghiệm trên máy cục bộ (Local Preview)
+## Chạy local
 
 ```bash
-yarn server
-# hoặc npm run server
+npm install
+cp .env.example .env
+npm run server
 ```
 
-Mở trình duyệt truy cập: [http://localhost:3000](http://localhost:3000)
-- Trang chủ tích hợp sẵn bộ xem trước trực quan cho tất cả widget (Đồng hồ chạy nhảy giây trực tiếp, test đổi theme/múi giờ và thẻ Spotify).
+Mở `http://localhost:3000` — server local chạy cả 4 route và trang preview.
 
----
+| Lệnh | Việc |
+| :--- | :--- |
+| `npm run server` | Server local + trang preview |
+| `npm test` | Chạy `node:test` |
+| `npm run lint` | ESLint |
+| `npm run build` | Vite build |
+| `npm run auth` | Lấy Spotify refresh token, ghi vào `.env` |
 
-## 🚀 4. Hướng dẫn Deploy lên Vercel (1-Click)
+Vercel dùng `yarn.lock`; local dùng npm hoặc yarn đều được.
 
-Dự án đã được cấu hình file [vercel.json](vercel.json) tự động rewrite route (`/clock`, `/quote`, `/spotify`, `/top-tracks`) sẵn sàng deploy:
+## Biến môi trường
 
-1. Đẩy mã nguồn lên repository GitHub của bạn:
-   ```bash
-   git push origin main
-   ```
-2. Truy cập [vercel.com](https://vercel.com), bấm **Add New Project** và chọn repository này.
-3. Cấu hình biến môi trường tại mục **Environment Variables** (nếu dùng):
-   - **Spotify**: `SPOTIFY_CLIENT_ID`, `SPOTIFY_CLIENT_SECRET`, `SPOTIFY_REFRESH_TOKEN`
-   - **LLM Quote (tùy chọn)**: `LLM_API_KEY`, `LLM_BASE_URL` (nếu dùng Groq/DeepSeek), `LLM_MODEL`
-   *(Nếu bạn chỉ sử dụng **Clock Widget** hoặc dùng Quote với danh mục offline fallback, bạn hoàn toàn không cần cấu hình thêm biến môi trường nào!)*
-4. Nhấn **Deploy**. Bạn sẽ nhận được URL public (ví dụ: `https://my-github-widget.vercel.app`).
+| Nhóm | Biến |
+| :--- | :--- |
+| Spotify (bắt buộc cho `/spotify`, `/top-tracks`) | `SPOTIFY_CLIENT_ID`, `SPOTIFY_CLIENT_SECRET`, `SPOTIFY_REFRESH_TOKEN` |
+| LLM (tùy chọn) | `GEMINI_API_KEY`, `GROQ_API_KEY`, `ANTHROPIC_API_KEY` (hoặc `CLAUDE_API_KEY`), `OPENAI_API_KEY` |
+| Generic | `LLM_PROVIDER`, `LLM_API_KEY`, `LLM_MODEL`, `LLM_BASE_URL` |
 
----
+Thứ tự chọn provider: `LLM_PROVIDER` → Gemini → Groq → Claude → OpenAI → `LLM_API_KEY` (suy ra từ model/base URL). Không có key nào thì dùng quote offline trong `docs/offline_quotes.json`.
 
-## 🧪 5. Chạy Kiểm thử & Lint
+| Provider | Model mặc định |
+| :--- | :--- |
+| `gemini` | `gemini-3.6-flash` |
+| `groq` | `openai/gpt-oss-20b` |
+| `claude` | `claude-3-5-haiku-20241022` |
+| `openai` | `gpt-4o-mini` |
 
-```bash
-# Chạy bộ test tự động (Node.js Test Runner)
-npm test
+## Deploy
 
-# Kiểm tra cú pháp và quy chuẩn code
-npm run lint
+- Vercel project: `my-github-widget`
+- Repo: `ximofam/ximofam`
+- Root Directory: `widget`
+- Production Branch: `main`
+- Domain: `my-github-widget.vercel.app`
+
+Khai báo biến môi trường ở **Project Settings → Environment Variables**. `vercel.json` rewrite `/clock`, `/quote`, `/spotify`, `/top-tracks` về các handler trong `api/`.
+
+## Cấu trúc
+
+```text
+api/          handler cho 4 route
+api/lib/      render SVG, Spotify client, LLM quote
+src/          Vite React app (UI mặc định)
+server.js     server local + trang preview
+scripts/      get-refresh-token.js
+docs/         offline_quotes.json
+test/         test bằng node:test
+vercel.json   rewrite route
 ```
+
+## Ghi chú
+
+- `/clock`, `/spotify`, `/quote` trả `no-cache`; `/top-tracks` cache 1 giờ.
+- Đồng hồ tự nhảy giây bằng CSS animation, không cần JavaScript phía client.
+- Card Spotify chỉ có 2 theme `dark`/`light`; clock có 5 theme.
