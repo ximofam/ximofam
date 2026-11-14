@@ -1,6 +1,6 @@
 # Widget cho profile GitHub
 
-Bốn endpoint SVG/JSON phục vụ README profile. App chạy trên Vercel, source nằm trong `widget/` của repo `ximofam/ximofam`; README ở root là nơi đang nhúng các route này.
+Bốn endpoint SVG/JSON phục vụ README profile. App chạy trên Vercel, source nằm trong `widget/` của repo `ximofam/ximofam`. README ở root nhúng `/clock`, `/spotify`, `/top-tracks`; `/quote` được `scripts/generate_quote.js` gọi hằng ngày để chèn quote vào README.
 
 Base URL: `https://my-github-widget.vercel.app`
 
@@ -58,7 +58,7 @@ Ví dụ: `.../top-tracks?range=long_term&count=4`
 | `tone` | `inspirational`, `philosophical`, `humorous`, `sarcastic`, `auto` | `inspirational` (hoặc `auto` khi có `status`) |
 | `provider` | `gemini`, `groq`, `claude`, `openai` | Tự chọn theo API key đang có |
 
-Ví dụ phản hồi:
+Ví dụ: `GET https://my-github-widget.vercel.app/quote?status=tired&lang=vi&topic=life`
 
 ```json
 {
@@ -92,7 +92,7 @@ Mở `http://localhost:3000` — server local chạy cả 4 route và trang prev
 | `npm run build` | Vite build |
 | `npm run auth` | Lấy Spotify refresh token, ghi vào `.env` |
 
-Vercel dùng `yarn.lock`; local dùng npm hoặc yarn đều được.
+Vercel dùng `yarn.lock` khi build; trên máy local dùng `npm` (yarn chưa chạy với Node 26 hiện tại).
 
 ## Biến môi trường
 
