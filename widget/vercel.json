@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    { "source": "/clock", "destination": "/api/clock" },
+    { "source": "/quote", "destination": "/api/quote" },
+    { "source": "/spotify", "destination": "/api/spotify" },
+    { "source": "/top-tracks", "destination": "/api/top-tracks" }
+  ]
+}

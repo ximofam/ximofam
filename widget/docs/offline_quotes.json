@@ -1,0 +1,60 @@
+{
+  "coding": {
+    "en": [
+      { "quote": "Code is like humor. When you have to explain it, it’s bad.", "author": "Cory House" },
+      { "quote": "First, solve the problem. Then, write the code.", "author": "John Johnson" },
+      { "quote": "Make it work, make it right, make it fast.", "author": "Kent Beck" },
+      { "quote": "Simplicity is prerequisite for reliability.", "author": "Edsger W. Dijkstra" },
+      { "quote": "Any fool can write code that a computer can understand. Good programmers write code that humans can understand.", "author": "Martin Fowler" },
+      { "quote": "There are only two hard things in Computer Science: cache invalidation and naming things.", "author": "Phil Karlton" }
+    ],
+    "vi": [
+      { "quote": "Code cũng giống như truyện cười. Nếu bạn phải giải thích thì nó dở rồi.", "author": "Cory House" },
+      { "quote": "Đầu tiên, hãy giải quyết vấn đề. Sau đó mới viết code.", "author": "John Johnson" },
+      { "quote": "Làm cho nó chạy được, làm cho nó đúng, rồi mới làm cho nó nhanh.", "author": "Kent Beck" },
+      { "quote": "Sự đơn giản là điều kiện tiên quyết cho sự tin cậy.", "author": "Edsger W. Dijkstra" },
+      { "quote": "Bất kỳ ai cũng có thể viết code cho máy tính hiểu. Lập trình viên giỏi viết code để con người hiểu.", "author": "Martin Fowler" }
+    ]
+  },
+  "life": {
+    "en": [
+      { "quote": "The only way to do great work is to love what you do.", "author": "Steve Jobs" },
+      { "quote": "Life is what happens when you’re busy making other plans.", "author": "John Lennon" },
+      { "quote": "Do what you can, with what you have, where you are.", "author": "Theodore Roosevelt" },
+      { "quote": "Happiness is not something ready made. It comes from your own actions.", "author": "Dalai Lama" }
+    ],
+    "vi": [
+      { "quote": "Cách duy nhất để làm nên sự nghiệp vĩ đại là yêu việc mình làm.", "author": "Steve Jobs" },
+      { "quote": "Cuộc sống là những gì diễn ra khi ta đang bận rộn với các kế hoạch khác.", "author": "John Lennon" },
+      { "quote": "Hãy làm những gì bạn có thể, với những gì bạn có, ở bất cứ nơi đâu bạn đứng.", "author": "Theodore Roosevelt" },
+      { "quote": "Hạnh phúc không phải là thứ có sẵn. Nó đến từ chính hành động của bạn.", "author": "Dalai Lama" }
+    ]
+  },
+  "motivation": {
+    "en": [
+      { "quote": "It always seems impossible until it’s done.", "author": "Nelson Mandela" },
+      { "quote": "Don’t watch the clock; do what it does. Keep going.", "author": "Sam Levenson" },
+      { "quote": "Believe you can and you’re halfway there.", "author": "Theodore Roosevelt" },
+      { "quote": "Small steps every day lead to giant leaps over time.", "author": "Anonymous" }
+    ],
+    "vi": [
+      { "quote": "Mọi thứ dường như luôn bất khả thi cho đến khi nó được hoàn thành.", "author": "Nelson Mandela" },
+      { "quote": "Đừng nhìn đồng hồ, hãy làm như nó: tiếp tục tiến về phía trước.", "author": "Sam Levenson" },
+      { "quote": "Hãy tin rằng bạn có thể làm được, bạn đã đi được nửa chặng đường.", "author": "Theodore Roosevelt" },
+      { "quote": "Mỗi ngày một bước nhỏ sẽ tạo nên bước nhảy vĩ đại theo thời gian.", "author": "Khuyết danh" }
+    ]
+  },
+  "humor": {
+    "en": [
+      { "quote": "It works on my machine! Then we’ll ship your machine!", "author": "Dev Folklore" },
+      { "quote": "There’s no place like 127.0.0.1.", "author": "Anonymous" },
+      { "quote": "A SQL query walks into a bar, walks up to two tables and asks, \"Can I join you?\"", "author": "Programmer Humor" },
+      { "quote": "Documentation is like sex. When it’s good, it’s great. When it’s bad, it’s better than nothing.", "author": "Dick Brandon" }
+    ],
+    "vi": [
+      { "quote": "Code chạy ngon trên máy em mà! Vậy thì ship luôn máy em cho khách hàng nhé!", "author": "Dân Dev" },
+      { "quote": "Chẳng có nơi nào ấm áp và an toàn bằng 127.0.0.1.", "author": "Khuyết danh" },
+      { "quote": "Một câu lệnh SQL bước vào quán bar, đến gần 2 cái bàn và hỏi: \"Tôi có thể JOIN cùng hai bạn không?\"", "author": "Truyện cười Dev" }
+    ]
+  }
+}
