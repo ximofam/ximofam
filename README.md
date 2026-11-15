@@ -11,7 +11,7 @@
     <th width="30%" align="center">⏰ Current Time</th>
     <th width="70%" align="left">
       <!-- DAILY_QUOTE_HEADER:START -->
-      💬 Quote of the Day &nbsp; <sub>💬 Status: <em>:disappointed: Đếm ngày thất nghiệp</em> • 🤖 Provider: <code>gemini-3.6-flash</code> • 🕒 Updated: <code>2026-11-15 15:05:36 (GMT+7)</code></sub>
+      💬 Quote of the Day &nbsp; <sub>💬 Status: <em>:disappointed: Đếm ngày thất nghiệp</em> • 🤖 Provider: <code>offline-fallback</code> • 🕒 Updated: <code>2026-11-16 04:25:08 (GMT+7)</code></sub>
       <!-- DAILY_QUOTE_HEADER:END -->
     </th>
   </tr>
@@ -24,10 +24,10 @@
     <td width="70%" align="left" valign="middle">
       <!-- DAILY_QUOTE:START -->
       <p align="left">
-        <em>“Khi mọi thứ tưởng như đang chống lại bạn, hãy nhớ rằng máy bay cất cánh ngược chiều gió, chứ không phải thuận chiều gió.”</em>
+        <em>“Hãy làm những gì bạn có thể, với những gì bạn có, ở bất cứ nơi đâu bạn đứng.”</em>
       </p>
       <p align="right">
-        — <strong>Henry Ford</strong>
+        — <strong>Theodore Roosevelt</strong>
       </p>
       <!-- DAILY_QUOTE:END -->
     </td>
