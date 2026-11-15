@@ -11,7 +11,7 @@
     <th width="30%" align="center">⏰ Current Time</th>
     <th width="70%" align="left">
       <!-- DAILY_QUOTE_HEADER:START -->
-      💬 Quote of the Day &nbsp; <sub>💬 Status: <em>:disappointed: Đếm ngày thất nghiệp</em> • 🤖 Provider: <code>offline-fallback</code> • 🕒 Updated: <code>2026-11-15 04:00:15 (GMT+7)</code></sub>
+      💬 Quote of the Day &nbsp; <sub>💬 Status: <em>:disappointed: Đếm ngày thất nghiệp</em> • 🤖 Provider: <code>gemini-3.6-flash</code> • 🕒 Updated: <code>2026-11-15 15:05:36 (GMT+7)</code></sub>
       <!-- DAILY_QUOTE_HEADER:END -->
     </th>
   </tr>
@@ -24,10 +24,10 @@
     <td width="70%" align="left" valign="middle">
       <!-- DAILY_QUOTE:START -->
       <p align="left">
-        <em>“Cách duy nhất để làm nên sự nghiệp vĩ đại là yêu việc mình làm.”</em>
+        <em>“Khi mọi thứ tưởng như đang chống lại bạn, hãy nhớ rằng máy bay cất cánh ngược chiều gió, chứ không phải thuận chiều gió.”</em>
       </p>
       <p align="right">
-        — <strong>Steve Jobs</strong>
+        — <strong>Henry Ford</strong>
       </p>
       <!-- DAILY_QUOTE:END -->
     </td>
