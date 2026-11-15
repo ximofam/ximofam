@@ -121,6 +121,8 @@ Thứ tự chọn provider: `LLM_PROVIDER` → Gemini → Groq → Claude → Op
 
 Khai báo biến môi trường ở **Project Settings → Environment Variables**. `vercel.json` rewrite `/clock`, `/quote`, `/spotify`, `/top-tracks` về các handler trong `api/`.
 
+`vercel.json` cũng đặt `ignoreCommand`: chỉ build khi có thay đổi trong `widget/`. Commit chỉ sửa README ở root (daily quote, WakaTime) sẽ được bỏ qua, không deploy lại.
+
 ## Cấu trúc
 
 ```text
