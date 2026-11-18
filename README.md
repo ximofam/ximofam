@@ -58,7 +58,7 @@
 ### ⏱️ WakaTime Stats
 
 <!--START_SECTION:waka-->
-![Code Time](https://img.shields.io/badge/Code%20Time-119%20hrs%2047%20mins-blue?style=flat)
+![Code Time](https://img.shields.io/badge/Code%20Time-123%20hrs%2025%20mins-blue?style=flat)
 
 📊 **This Week I Spent My Time On**
 
@@ -66,18 +66,18 @@
 🕑 Time Zone: Asia/Ho_Chi_Minh
 
 💬 Programming Languages:
-Markdown                 15 hrs 21 mins     █████████████░░░░░░░░░░░░  50.49 %
-Go                       5 hrs 24 mins      ████░░░░░░░░░░░░░░░░░░░░░  17.78 %
-Lua                      2 hrs 20 mins      ██░░░░░░░░░░░░░░░░░░░░░░░   7.68 %
-Other                    1 hr 28 mins       █░░░░░░░░░░░░░░░░░░░░░░░░   4.86 %
-Bash                     1 hr 20 mins       █░░░░░░░░░░░░░░░░░░░░░░░░   4.44 %
+Markdown                 13 hrs 38 mins     ████████████░░░░░░░░░░░░░  47.76 %
+Go                       5 hrs 24 mins      █████░░░░░░░░░░░░░░░░░░░░  18.93 %
+SQL                      2 hrs 4 mins       ██░░░░░░░░░░░░░░░░░░░░░░░   7.25 %
+Lua                      1 hr 55 mins       ██░░░░░░░░░░░░░░░░░░░░░░░   6.71 %
+Bash                     1 hr 25 mins       █░░░░░░░░░░░░░░░░░░░░░░░░   4.98 %
 
 💻 Operating System:
-Linux                    30 hrs 24 mins     █████████████████████████ 100.00 %
+Linux                    28 hrs 34 mins     █████████████████████████ 100.00 %
 
 ```
 
-Last Updated on 17/11/2026 06:46:25 UTC
+Last Updated on 18/11/2026 06:04:21 UTC
 <!--END_SECTION:waka-->
 
 ---
